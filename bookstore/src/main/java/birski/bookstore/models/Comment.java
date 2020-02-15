@@ -1,9 +1,11 @@
 package birski.bookstore.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "comments", schema = "public")
@@ -22,9 +24,9 @@ public class Comment {
     @NotNull
     private float rating;
 
-    //todo poprawić date
     @NotNull
-    private String date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date date;
 
     @JsonIgnore  //todo usunąć JsonIgnora
     @ManyToOne
@@ -34,7 +36,7 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String author, String description, float rating, String date) {
+    public Comment(String author, String description, float rating, Date date) {
         this.author = author;
         this.description = description;
         this.rating = rating;
@@ -73,11 +75,19 @@ public class Comment {
         this.rating = rating;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

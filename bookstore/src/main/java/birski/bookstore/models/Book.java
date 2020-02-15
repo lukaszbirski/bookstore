@@ -1,11 +1,13 @@
 package birski.bookstore.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,16 +49,16 @@ public class Book {
     @NotNull
     private double price;
 
-    //todo poprawić date
     @NotNull
-    private String releaseDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date releaseDate;
 
     //@JsonIgnore //todo usunąć JsonIgnora
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "book", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Comment> comments = new HashSet<>();
 
-    public Book(String title, String author, Set<Category> categories, CoverType coverType, String publisher, String description, long ean, int pages, double price, String releaseDate, Set<Comment> comments) {
+    public Book(String title, String author, Set<Category> categories, CoverType coverType, String publisher, String description, long ean, int pages, double price, Date releaseDate, Set<Comment> comments) {
         this.title = title;
         this.author = author;
         this.categories = categories;
@@ -145,11 +147,11 @@ public class Book {
         this.price = price;
     }
 
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 
