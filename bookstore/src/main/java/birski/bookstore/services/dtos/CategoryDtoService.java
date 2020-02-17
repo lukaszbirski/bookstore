@@ -26,7 +26,7 @@ public class CategoryDtoService {
         this.mapValidationErrorService = mapValidationErrorService;
     }
 
-    public List<CategoryDto> getCategories(){
+    public List<CategoryDto> getCategoriesDto(){
         List<CategoryDto> categoryDtos = new ArrayList<>();
         categoryRepository.findAll().forEach(c -> categoryDtos.add(categoryMapper.map(c)));
         return categoryDtos;
@@ -47,10 +47,13 @@ public class CategoryDtoService {
         return new ResponseEntity<CategoryDto>(categoryDto, HttpStatus.CREATED);
     }
 
-    public CategoryDto updateCategoryDto(String categoryName, CategoryDto categoryDto){
+    public ResponseEntity<?> updateCategoryDto(String categoryName, CategoryDto categoryDto, BindingResult bindingResult){
+        ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
+        if (errors != null) return errors;
         return categoryRepository.getCategoryByCategoryName(categoryName).map(c -> {
             c.setCategoryName(categoryDto.getCategoryName());
-            return categoryMapper.map(categoryRepository.save(c));
+            categoryMapper.map(categoryRepository.save(c));
+            return new ResponseEntity<CategoryDto>(categoryDto, HttpStatus.OK);
         }).orElseThrow(() -> new ResourceNotFoundException("Category name: " + categoryName + " not found."));
     }
 
@@ -60,7 +63,5 @@ public class CategoryDtoService {
             return new ResponseEntity<>("Category name: " + categoryName + " was deleted!", HttpStatus.OK);
         }).orElseThrow(()-> new ResourceNotFoundException("Category name: " + categoryName + " not found."));
     }
-
-    //todo do dodawania dodać zabezpieczenie przez stworzeniem dwóch takich samych rekordów
-    //todo stworzyć dokładną kopię CoverType
+//todo poprawić zabezpeczenie przed stworzeniem dwóch takich samych rekordów w create i update
 }
