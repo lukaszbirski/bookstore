@@ -1,10 +1,14 @@
 package birski.bookstore.models.dtos;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDto {
 
+    @NotBlank(message = "Field is required")
+    @Column(unique = true)
     private String categoryName;
     private List<String> books = new ArrayList<>();
 

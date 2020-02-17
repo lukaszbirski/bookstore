@@ -1,12 +1,16 @@
 package birski.bookstore.services.dtos;
 
+import birski.bookstore.exceptions.CoverTypeDtoNameException;
 import birski.bookstore.exceptions.ResourceNotFoundException;
 import birski.bookstore.mappers.CoverTypeMapper;
+import birski.bookstore.models.dtos.CategoryDto;
 import birski.bookstore.models.dtos.CoverTypeDto;
 import birski.bookstore.repositories.CoverTypeRepository;
+import birski.bookstore.services.validation.MapValidationErrorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +20,12 @@ public class CoverTypeDtoService {
 
     private CoverTypeRepository coverTypeRepository;
     private CoverTypeMapper coverTypeMapper;
+    private MapValidationErrorService mapValidationErrorService;
 
-    public CoverTypeDtoService(CoverTypeRepository coverTypeRepository, CoverTypeMapper coverTypeMapper) {
+    public CoverTypeDtoService(CoverTypeRepository coverTypeRepository, CoverTypeMapper coverTypeMapper, MapValidationErrorService mapValidationErrorService) {
         this.coverTypeRepository = coverTypeRepository;
         this.coverTypeMapper = coverTypeMapper;
+        this.mapValidationErrorService = mapValidationErrorService;
     }
 
     public List<CoverTypeDto> getCoverTypesDto(){
@@ -35,7 +41,9 @@ public class CoverTypeDtoService {
         }).orElseThrow(() -> new ResourceNotFoundException("Category name: " + name + " not found."));
     }
 
-    public ResponseEntity<CoverTypeDto> createCoverTypeDto(CoverTypeDto coverTypeDto){
+    public ResponseEntity<?> createCoverTypeDto(CoverTypeDto coverTypeDto, BindingResult bindingResult){
+        ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
+        if (errors != null) return errors;
         coverTypeRepository.save(coverTypeMapper.reverse(coverTypeDto));
         return new ResponseEntity<CoverTypeDto>(coverTypeDto, HttpStatus.CREATED);
     }
@@ -55,4 +63,4 @@ public class CoverTypeDtoService {
     }
 }
 
-//todo do dodawania dodać zabezpieczenie przez stworzeniem dwóch takich samych rekordów
+//todo poprawić zabezpeczenie przed stworzeniem dwóch takich samych rekordów

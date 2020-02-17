@@ -2,11 +2,14 @@ package birski.bookstore.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,13 +22,13 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    //@NotBlank(message = "Title is required")
     private String title;
 
-    @NotNull
+    //@NotBlank(message = "Author is required")
     private String author;
 
-    //@JsonIgnore  //todo usunąć JsonIgnora
+    @JsonIgnore  //todo usunąć JsonIgnora
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "books_categories", joinColumns = {@JoinColumn(name = "books_id")},
     inverseJoinColumns = {@JoinColumn(name = "categories_id")})
@@ -34,31 +37,34 @@ public class Book {
     @ManyToOne(fetch = FetchType.EAGER)
     private CoverType coverType;
 
-    @NotNull
+    //@NotBlank(message = "Publisher is required")
     private String publisher;
 
-    @NotNull
+    //@NotBlank(message = "Description is required")
     private String description;
 
-    @NotNull
-    private long ean;
+    //@Size(min = 12, max = 13, message = "Ean number should have between 12 and 13 digits")
+    //@NotBlank(message = "Ean number is required")
+    //@Pattern(regexp="\\d", message = "Ean number should have between 12 and 13 digits")
+    private String ean;
 
-    @NotNull
+    //@NotBlank(message = "Number of pages is required")
     private int pages;
 
-    @NotNull
+    //@NotBlank(message = "Price is required")
+    //@Digits(integer = 4, fraction = 2, message = "Invalid value")
     private double price;
 
-    @NotNull
+    //@NotBlank(message = "Release date is required")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date releaseDate;
 
-    //@JsonIgnore //todo usunąć JsonIgnora
+    @JsonIgnore //todo usunąć JsonIgnora
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "book", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Comment> comments = new HashSet<>();
 
-    public Book(String title, String author, Set<Category> categories, CoverType coverType, String publisher, String description, long ean, int pages, double price, Date releaseDate, Set<Comment> comments) {
+    public Book(String title, String author, Set<Category> categories, CoverType coverType, String publisher, String description, String ean, int pages, double price, Date releaseDate, Set<Comment> comments) {
         this.title = title;
         this.author = author;
         this.categories = categories;
@@ -123,11 +129,11 @@ public class Book {
         this.description = description;
     }
 
-    public long getEan() {
+    public String getEan() {
         return ean;
     }
 
-    public void setEan(long ean) {
+    public void setEan(String ean) {
         this.ean = ean;
     }
 

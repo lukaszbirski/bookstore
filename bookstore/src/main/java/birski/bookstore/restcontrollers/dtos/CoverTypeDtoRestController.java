@@ -3,8 +3,10 @@ package birski.bookstore.restcontrollers.dtos;
 import birski.bookstore.models.dtos.CoverTypeDto;
 import birski.bookstore.services.dtos.CoverTypeDtoService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static birski.bookstore.configs.ApiConfig.*;
@@ -30,8 +32,8 @@ public class CoverTypeDtoRestController {
     }
 
     @PostMapping()
-    public ResponseEntity<CoverTypeDto> createCoverTypeDto(@RequestBody CoverTypeDto coverTypeDto){
-        return coverTypeDtoService.createCoverTypeDto(coverTypeDto);
+    public ResponseEntity<?> createCoverTypeDto(@Valid @RequestBody CoverTypeDto coverTypeDto, BindingResult bindingResult){
+        return coverTypeDtoService.createCoverTypeDto(coverTypeDto, bindingResult);
     }
 
     @PutMapping(NAME_URL)
