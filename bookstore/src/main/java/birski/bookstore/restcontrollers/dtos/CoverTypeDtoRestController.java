@@ -37,8 +37,8 @@ public class CoverTypeDtoRestController {
     }
 
     @PutMapping(NAME_URL)
-    public CoverTypeDto updateCoverTypeDto(@PathVariable ("name") String name, @RequestBody CoverTypeDto coverTypeDto){
-        return coverTypeDtoService.updateCoverTypeDto(name, coverTypeDto);
+    public ResponseEntity<?> updateCoverTypeDto(@PathVariable ("name") String name, @Valid @RequestBody CoverTypeDto coverTypeDto, BindingResult bindingResult){
+        return coverTypeDtoService.updateCoverTypeDto(name, coverTypeDto, bindingResult);
     }
 
     @DeleteMapping(NAME_URL)

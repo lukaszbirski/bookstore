@@ -48,10 +48,13 @@ public class CoverTypeDtoService {
         return new ResponseEntity<CoverTypeDto>(coverTypeDto, HttpStatus.CREATED);
     }
 
-    public CoverTypeDto updateCoverTypeDto(String name, CoverTypeDto coverTypeDto){
+    public ResponseEntity<?> updateCoverTypeDto(String name, CoverTypeDto coverTypeDto, BindingResult bindingResult){
+        ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
+        if (errors != null) return errors;
         return coverTypeRepository.getCoverTypeByName(name).map(c -> {
             c.setName(coverTypeDto.getName());
-            return coverTypeMapper.map(coverTypeRepository.save(c));
+            coverTypeMapper.map(coverTypeRepository.save(c));
+            return new ResponseEntity<CoverTypeDto>(coverTypeDto, HttpStatus.OK);
         }).orElseThrow(() -> new ResourceNotFoundException("Cover Type name: " + name + " not found."));
     }
 
@@ -63,4 +66,4 @@ public class CoverTypeDtoService {
     }
 }
 
-//todo poprawić zabezpeczenie przed stworzeniem dwóch takich samych rekordów
+//todo poprawić zabezpeczenie przed stworzeniem dwóch takich samych rekordów w create i update
