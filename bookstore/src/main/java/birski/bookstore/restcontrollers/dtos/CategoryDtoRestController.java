@@ -52,5 +52,3 @@ public class CategoryDtoRestController {
         return categoryDtoService.deleteCategoryDto(categoryName);
     }
 }
-//todo dokończyć RestController - pozostał tylko update
-//todo stworzyć dokładną kopię CoverType
