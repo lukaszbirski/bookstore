@@ -31,7 +31,7 @@ import static birski.bookstore.configs.ApiConfig.*;
 
 @Service
 public class LocalFileService {
-    //todo połączyć z klasą Book
+
     private static final Logger logger = LoggerFactory.getLogger(LocalFileService.class);
 
     private ServletContext servletContext;

@@ -19,7 +19,6 @@ public class Category {
     @NotBlank(message = "Field is required")
     private String categoryName;
 
-    @JsonIgnore  //todo usunąć JsonIgnora
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "categories")
     private Set<Book> books = new HashSet<>();
 

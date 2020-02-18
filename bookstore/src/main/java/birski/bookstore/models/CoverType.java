@@ -20,7 +20,6 @@ public class CoverType {
     @NotNull
     private String name;
 
-    @JsonIgnore //todo usunąć JsonIgnora
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "coverType", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Book> books = new HashSet<>();

@@ -18,7 +18,7 @@ public class CommentMapper implements Mapper<Comment, CommentDto>{
         commentDto.setAuthor(from.getAuthor());
         commentDto.setDescription(from.getDescription());
         commentDto.setRating(from.getRating());
-        commentDto.setDate(from.getDate().toString().substring(0,10)); //todo sprawdzić jak wyciąć fragment Stringa
+        commentDto.setDate(from.getDate().toString().substring(0,10));
         commentDto.setBookTitle(from.getBook().getTitle());
         return commentDto;
     }

@@ -28,7 +28,6 @@ public class Book {
     //@NotBlank(message = "Author is required")
     private String author;
 
-    @JsonIgnore  //todo usunąć JsonIgnora
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "books_categories", joinColumns = {@JoinColumn(name = "books_id")},
     inverseJoinColumns = {@JoinColumn(name = "categories_id")})
@@ -59,12 +58,13 @@ public class Book {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date releaseDate;
 
-    @JsonIgnore //todo usunąć JsonIgnora
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "book", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Comment> comments = new HashSet<>();
 
-    public Book(String title, String author, Set<Category> categories, CoverType coverType, String publisher, String description, String ean, int pages, double price, Date releaseDate, Set<Comment> comments) {
+    private String fileName;
+
+    public Book(String title, String author, Set<Category> categories, CoverType coverType, String publisher, String description, String ean, int pages, double price, Date releaseDate, Set<Comment> comments, String fileName) {
         this.title = title;
         this.author = author;
         this.categories = categories;
@@ -76,6 +76,7 @@ public class Book {
         this.price = price;
         this.releaseDate = releaseDate;
         this.comments = comments;
+        this.fileName = fileName;
     }
 
     public Book() {
@@ -175,6 +176,14 @@ public class Book {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     @Override

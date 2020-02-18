@@ -17,12 +17,12 @@ values ('proza polska');
 insert into category ("category_name")
 values ('powieść');
 --books
-insert into books("title", "author", "cover_type_id", "description", "ean", "pages", "price", "publisher", "release_date")
-values ('Głosy z zaświatów', 'Remigiusz Mróz', 2, 'Nowa książka znanego autora', 9788380759893, 442, 23.14, 'Filia', '2020-01-29');
-insert into books("title", "author", "cover_type_id", "description", "ean", "pages", "price", "publisher", "release_date")
-values ('O krok za daleko', 'Harlan Coben', 2, 'Triller autorstwa Cobena.', 9788381258258, 448, 24.98, 'Albatros', '2020-01-15');
-insert into books("title", "author", "cover_type_id", "description", "ean", "pages", "price", "publisher", "release_date")
-values ('Księgi Jakubowe', 'Olga Tokarczuk', 1, 'Nagroda Literacka Nike 2015!', 9788308049396, 912, 45.80, 'Wydawnictwo Literackie', '2014-10-23');
+insert into books("title", "author", "cover_type_id", "description", "ean", "pages", "price", "publisher", "release_date", "file_name")
+values ('Głosy z zaświatów', 'Remigiusz Mróz', 2, 'Nowa książka znanego autora', 9788380759893, 442, 23.14, 'Filia', '2020-01-29', '783441-352x500.jpg');
+insert into books("title", "author", "cover_type_id", "description", "ean", "pages", "price", "publisher", "release_date", "file_name")
+values ('O krok za daleko', 'Harlan Coben', 2, 'Triller autorstwa Cobena.', 9788381258258, 448, 24.98, 'Albatros', '2020-01-15', '770180-352x500.jpg');
+insert into books("title", "author", "cover_type_id", "description", "ean", "pages", "price", "publisher", "release_date", "file_name")
+values ('Księgi Jakubowe', 'Olga Tokarczuk', 1, 'Nagroda Literacka Nike 2015!', 9788308049396, 912, 45.80, 'Wydawnictwo Literackie', '2014-10-23', '742364-352x500.jfif');
 --comments
 insert into comments("author", "date", "description", "rating", "book_id")
 values ('Kasiula', '2020-01-01', 'Książka jest bardzo wciągająca. Polecam!', 5, 1);

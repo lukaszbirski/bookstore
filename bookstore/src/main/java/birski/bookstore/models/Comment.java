@@ -28,7 +28,6 @@ public class Comment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
-    //@JsonIgnore  //todo usunąć JsonIgnora
     @ManyToOne
     @JoinColumn(nullable = false)
     private Book book;
