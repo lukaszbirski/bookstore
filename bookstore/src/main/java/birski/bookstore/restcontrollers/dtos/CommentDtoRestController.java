@@ -28,9 +28,14 @@ public class CommentDtoRestController {
         return commentDtoService.getCommentsDto();
     }
 
-    @GetMapping(NAME_URL)
+    @GetMapping("/{name}")
     public List<CommentDto> getCommentDto(@PathVariable ("name") String bookTitle){
         return commentDtoService.getCommentsByBookTitle(bookTitle);
+    }
+
+    @DeleteMapping("/{name}&{book}")
+    public ResponseEntity<?> deleteCommentDto(@PathVariable ("name") String author, @PathVariable ("book") String bookTitle){
+        return commentDtoService.deleteCommentDto(author, bookTitle);
     }
 
 //    @PostMapping()

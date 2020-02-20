@@ -1,4 +1,4 @@
-package birski.bookstore.restcontrollers;
+package birski.bookstore.restcontrollers.dtos;
 
 import birski.bookstore.models.LocalFileManager;
 import birski.bookstore.services.LocalFileService;

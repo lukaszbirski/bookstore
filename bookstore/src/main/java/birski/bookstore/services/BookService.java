@@ -7,9 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+//@Scope(proxyMode = ScopedProxyMode.INTERFACES)
+//@Transactional
 public class BookService {
 
     private BookRepository bookRepository;
@@ -42,15 +45,32 @@ public class BookService {
             b.setPages(book.getPages());
             b.setPrice(book.getPrice());
             b.setReleaseDate(book.getReleaseDate());
+
             b.setComments(book.getComments());
             return bookRepository.save(b);
         }).orElseThrow(() -> new ResourceNotFoundException("Book id: " + id + " not found."));
     }
 
-    public ResponseEntity<?> deleteBook(long id){
-        return bookRepository.findById(id).map(b -> {
-            bookRepository.deleteById(id);
-            return new ResponseEntity<>("Book id: " + id + " was deleted!", HttpStatus.OK);
+        public ResponseEntity<?> deleteBook(long id){
+        return bookRepository.findById(id).map(b ->{
+            //bookRepository.deleteById(id);
+            //bookRepository.delete(b);
+            bookRepository.deleteBookById(id);
+            return new ResponseEntity<>("Book id: " + b.getTitle() + " was deleted!", HttpStatus.OK);
         }).orElseThrow(() -> new ResourceNotFoundException("Book id: " + id + " not found."));
     }
+//    public Book deleteBook(long id){
+//        return bookRepository.findById(id).map(b->{
+//                bookRepository.deleteById(id);
+//                return book
+//        }).
+
+//    }
 }
+
+//    public ResponseEntity<?> deleteBook(long id){
+//        return bookRepository.findById(id).map(b ->{
+//            bookRepository.delete(b);
+//            return new ResponseEntity<>("Book id: " + id + " was deleted!", HttpStatus.OK);
+//        }).orElseThrow(() -> new ResourceNotFoundException("Book id: " + id + " not found."));
+//    }

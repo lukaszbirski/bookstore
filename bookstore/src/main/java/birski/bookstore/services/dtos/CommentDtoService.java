@@ -35,7 +35,6 @@ public class CommentDtoService {
         return commentDtos;
     }
 
-
     public List<CommentDto> getCommentsByBookTitle(String title){
         List<CommentDto> commentDtos = new ArrayList<>();
         return commentRepository.getAllByBookTitle(title).map(c -> {
@@ -45,10 +44,18 @@ public class CommentDtoService {
             return commentDtos;
         }).orElseThrow(() -> new ResourceNotFoundException("No books have been found for book title: " + title));
     }
-    //todo po czym usuwać komentarz?
-    public ResponseEntity<?> deleteCommentDto(){
-
-        return null;
+//todo sprawdzić działanie uduwania komentarza, nie działa sprawdzić w bazodanowym RestControllerze
+    public ResponseEntity<?> deleteCommentDto(String author, String bookTitle){
+        return commentRepository.getAllByBookTitle(bookTitle).map( b -> {
+            for (Comment comment : b){
+                if (comment.getAuthor().equals(author)) {
+                    commentRepository.delete(comment);
+                    //commentRepository.delete(comment);
+                    return new ResponseEntity<String>("Comment authored by:" + author + " for book: " + bookTitle + " was deleted!", HttpStatus.OK);
+                }
+            }
+            return new ResponseEntity<String>("There is no comment authored by: " + author + " regading book: " + bookTitle, HttpStatus.OK);
+        }).orElseThrow(() -> new ResourceNotFoundException("Book: " + bookTitle + "do not exist!"));
     }
 
 }

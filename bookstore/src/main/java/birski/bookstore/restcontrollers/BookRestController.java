@@ -41,8 +41,8 @@ public class BookRestController {
         return bookService.updateBook(id, book);
     }
 
-    @DeleteMapping(ID_URL)
-    public ResponseEntity<?> deleteBook(@PathVariable long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable ("id") long id){
         return bookService.deleteBook(id);
     }
 }

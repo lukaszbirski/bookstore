@@ -1,42 +1,43 @@
 package birski.bookstore.models.dtos;
 
-import birski.bookstore.models.Category;
-import birski.bookstore.models.Comment;
-import com.fasterxml.jackson.annotation.JsonFormat;
-
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 public class BookDto {
 
-    //@NotBlank(message = "Title is required")
+    @NotBlank(message = "Title is required")
     private String title;
-    //@NotBlank(message = "Author is required")
+
+    @NotBlank(message = "Author is required")
     private String author;
 
     private List<String> categories = new ArrayList<>();
 
+    @NotBlank(message = "Cover type is required")
     private String coverType;
 
-    //@NotBlank(message = "Publisher is required")
+    @NotBlank(message = "Publisher is required")
     private String publisher;
 
-    //@NotBlank(message = "Description is required")
+    @NotBlank(message = "Description is required")
     private String description;
 
-    //@Size(min = 12, max = 13, message = "Ean number should have between 12 and 13 digits")
-    //@NotBlank(message = "Ean number is required")
-    //@Pattern(regexp="\\d", message = "Ean number should have between 12 and 13 digits")
+    @Size(min = 12, max = 13, message = "Ean number should have between 12 and 13 digits")
+    @NotBlank(message = "Ean number is required")
+    @Pattern(regexp="\\d", message = "Ean number should have between 12 and 13 digits")
     private String ean;
 
-    //@NotBlank(message = "Number of pages is required")
+    @NotBlank(message = "Number of pages is required")
     private int pages;
 
-    //@NotBlank(message = "Price is required")
-    //@Digits(integer = 4, fraction = 2, message = "Invalid value")
+    @NotBlank(message = "Price is required")
+    @Digits(integer = 4, fraction = 2, message = "Invalid value")
     private double price;
 
-    //@NotBlank(message = "Release date is required")
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @NotBlank(message = "Release date is required")
     private String releaseDate;
 
     private List<CommentDto> comments = new ArrayList<>();

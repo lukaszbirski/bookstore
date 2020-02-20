@@ -42,7 +42,7 @@ public class CommentService {
 
     public ResponseEntity<?> deleteComment(long id){
         return commentRepository.findById(id).map(c -> {
-            commentRepository.delete(c);
+            commentRepository.deleteById(id);
             return new ResponseEntity<>("Comment id: " + id + " was deleted!", HttpStatus.OK);
         }).orElseThrow(()-> new ResourceNotFoundException("Comment id: " + id + " not found."));
     }

@@ -10,9 +10,7 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "books", schema = "public")
@@ -28,11 +26,13 @@ public class Book {
     //@NotBlank(message = "Author is required")
     private String author;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "books_categories", joinColumns = {@JoinColumn(name = "books_id")},
     inverseJoinColumns = {@JoinColumn(name = "categories_id")})
     private Set<Category> categories = new HashSet<>();
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private CoverType coverType;
 
@@ -58,8 +58,11 @@ public class Book {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date releaseDate;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "book", cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book"
+            //, cascade = CascadeType.ALL
+    )
+    //@OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Comment> comments = new HashSet<>();
 
     private String fileName;
@@ -184,23 +187,5 @@ public class Book {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", categories=" + categories +
-                ", coverType=" + coverType +
-                ", publisher='" + publisher + '\'' +
-                ", description='" + description + '\'' +
-                ", ean=" + ean +
-                ", pages=" + pages +
-                ", price=" + price +
-                ", releaseDate='" + releaseDate + '\'' +
-                ", comments=" + comments +
-                '}';
     }
 }

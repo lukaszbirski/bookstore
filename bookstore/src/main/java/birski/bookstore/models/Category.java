@@ -2,6 +2,8 @@ package birski.bookstore.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -20,6 +22,7 @@ public class Category {
     private String categoryName;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "categories")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Book> books = new HashSet<>();
 
     public Category() {
@@ -52,14 +55,5 @@ public class Category {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", categoryName='" + categoryName + '\'' +
-                ", books=" + books +
-                '}';
     }
 }

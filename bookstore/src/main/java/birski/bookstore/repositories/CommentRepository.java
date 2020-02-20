@@ -12,4 +12,7 @@ import java.util.Optional;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     Optional<List<Comment>> getAllByBookTitle(String title);
+
+    @Override
+    void delete(Comment comment);
 }

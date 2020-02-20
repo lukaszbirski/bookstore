@@ -3,6 +3,8 @@ package birski.bookstore.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,8 +30,10 @@ public class Comment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
+    @JsonIgnore //todo usunąć
+    @ManyToOne//(cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_id", nullable = false)
+    //@OnDelete(action = OnDeleteAction.CASCADE)
     private Book book;
 
     public Comment() {

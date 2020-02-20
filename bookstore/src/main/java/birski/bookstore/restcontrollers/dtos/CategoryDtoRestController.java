@@ -32,7 +32,7 @@ public class CategoryDtoRestController {
         return categoryDtoService.getCategoriesDto();
     }
 
-    @GetMapping(NAME_URL)
+    @GetMapping("/{name}")
     public CategoryDto getCategoryDto(@PathVariable String name){
         return categoryDtoService.getCategory(name);
     }
@@ -42,12 +42,12 @@ public class CategoryDtoRestController {
         return categoryDtoService.createCategoryDto(categoryDto, bindingResult);
     }
 
-    @PutMapping(NAME_URL)
+    @PutMapping("/{name}")
     public ResponseEntity<?> updateCategoryDto(@PathVariable ("name") String categoryName, @Valid @RequestBody CategoryDto categoryDto, BindingResult bindingResult){
         return categoryDtoService.updateCategoryDto(categoryName, categoryDto, bindingResult);
     }
 
-    @DeleteMapping(NAME_URL)
+    @DeleteMapping("/{name}")
     public ResponseEntity<?> deleteCategoryDto(@PathVariable ("name") String categoryName){
         return categoryDtoService.deleteCategoryDto(categoryName);
     }
