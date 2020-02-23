@@ -1,6 +1,6 @@
 package birski.bookstore.repositories;
 
-import birski.bookstore.models.CoverType;
+import birski.bookstore.models.daos.CoverType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,15 +1,8 @@
-package birski.bookstore.models;
+package birski.bookstore.models.daos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.*;
 
 @Entity
@@ -21,6 +14,7 @@ public class Book {
     private Long id;
 
     //@NotBlank(message = "Title is required")
+    @Column(unique = true)
     private String title;
 
     //@NotBlank(message = "Author is required")

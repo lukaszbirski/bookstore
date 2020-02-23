@@ -1,19 +1,13 @@
 package birski.bookstore.restcontrollers.dtos;
 
-import birski.bookstore.models.Category;
 import birski.bookstore.models.dtos.CategoryDto;
 import birski.bookstore.services.dtos.CategoryDtoService;
-import birski.bookstore.services.validation.MapValidationErrorService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static birski.bookstore.configs.ApiConfig.*;
 

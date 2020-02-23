@@ -1,7 +1,7 @@
 package birski.bookstore.restcontrollers.dtos;
 
-import birski.bookstore.models.LocalFileManager;
-import birski.bookstore.services.LocalFileService;
+import birski.bookstore.models.daos.LocalFileManager;
+import birski.bookstore.services.daos.LocalFileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;

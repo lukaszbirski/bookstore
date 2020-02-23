@@ -1,6 +1,5 @@
-package birski.bookstore.models;
+package birski.bookstore.models.daos;
 
-import com.sun.istack.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 

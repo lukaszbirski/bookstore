@@ -1,4 +1,4 @@
-package birski.bookstore.models;
+package birski.bookstore.models.daos;
 
 public class LocalFileManager {
 

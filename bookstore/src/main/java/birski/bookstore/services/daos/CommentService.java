@@ -1,7 +1,7 @@
-package birski.bookstore.services;
+package birski.bookstore.services.daos;
 
 import birski.bookstore.exceptions.ResourceNotFoundException;
-import birski.bookstore.models.Comment;
+import birski.bookstore.models.daos.Comment;
 import birski.bookstore.repositories.CommentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

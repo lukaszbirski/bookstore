@@ -1,7 +1,7 @@
-package birski.bookstore.restcontrollers;
+package birski.bookstore.restcontrollers.daos;
 
-import birski.bookstore.models.CoverType;
-import birski.bookstore.services.CoverTypeService;
+import birski.bookstore.models.daos.CoverType;
+import birski.bookstore.services.daos.CoverTypeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

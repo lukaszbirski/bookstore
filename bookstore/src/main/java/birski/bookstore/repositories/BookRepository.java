@@ -1,6 +1,6 @@
 package birski.bookstore.repositories;
 
-import birski.bookstore.models.Book;
+import birski.bookstore.models.daos.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -2,13 +2,12 @@ package birski.bookstore.services.dtos;
 
 import birski.bookstore.exceptions.ResourceNotFoundException;
 import birski.bookstore.mappers.BookMapper;
-import birski.bookstore.models.Comment;
 import birski.bookstore.models.dtos.BookDto;
 import birski.bookstore.repositories.BookRepository;
 import birski.bookstore.repositories.CategoryRepository;
 import birski.bookstore.repositories.CommentRepository;
 import birski.bookstore.repositories.CoverTypeRepository;
-import birski.bookstore.services.LocalFileService;
+import birski.bookstore.services.daos.LocalFileService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

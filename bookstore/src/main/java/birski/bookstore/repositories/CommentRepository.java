@@ -1,7 +1,6 @@
 package birski.bookstore.repositories;
 
-import birski.bookstore.models.Comment;
-import birski.bookstore.models.dtos.CommentDto;
+import birski.bookstore.models.daos.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

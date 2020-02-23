@@ -1,7 +1,6 @@
-package birski.bookstore.models;
+package birski.bookstore.models.daos;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -1,13 +1,12 @@
-package birski.bookstore.services;
+package birski.bookstore.services.daos;
 
 import birski.bookstore.exceptions.ResourceNotFoundException;
-import birski.bookstore.models.Book;
+import birski.bookstore.models.daos.Book;
 import birski.bookstore.repositories.BookRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service

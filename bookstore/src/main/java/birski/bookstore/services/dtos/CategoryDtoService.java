@@ -68,5 +68,4 @@ public class CategoryDtoService {
             return new ResponseEntity<>("Category name: " + categoryName + " was deleted!", HttpStatus.OK);
         }).orElseThrow(()-> new ResourceNotFoundException("Category name: " + categoryName + " not found."));
     }
-//todo poprawić zabezpeczenie przed stworzeniem dwóch takich samych rekordów w create i update
 }

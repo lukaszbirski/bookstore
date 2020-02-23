@@ -2,15 +2,14 @@ package birski.bookstore.services.dtos;
 
 import birski.bookstore.exceptions.ResourceNotFoundException;
 import birski.bookstore.mappers.CommentMapper;
-import birski.bookstore.models.Comment;
-import birski.bookstore.models.dtos.CategoryDto;
+import birski.bookstore.models.daos.Comment;
 import birski.bookstore.models.dtos.CommentDto;
-import birski.bookstore.models.dtos.CoverTypeDto;
 import birski.bookstore.repositories.CommentRepository;
 import birski.bookstore.services.validation.MapValidationErrorService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,12 @@ public class CommentDtoService {
         this.mapValidationErrorService = mapValidationErrorService;
     }
 
+    public ResponseEntity<?> createCommentDto(CommentDto commentDto, BindingResult bindingResult){
+        ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
+        if (errors != null) return errors;
+        commentRepository.save(commentMapper.reverse(commentDto));
+        return new ResponseEntity<CommentDto>(commentDto, HttpStatus.CREATED);
+    }
 
     public List<CommentDto> getCommentsDto (){
         List<CommentDto> commentDtos = new ArrayList<>();
@@ -44,17 +49,17 @@ public class CommentDtoService {
             return commentDtos;
         }).orElseThrow(() -> new ResourceNotFoundException("No books have been found for book title: " + title));
     }
-//todo sprawdzić działanie uduwania komentarza, nie działa sprawdzić w bazodanowym RestControllerze
+
     public ResponseEntity<?> deleteCommentDto(String author, String bookTitle){
         return commentRepository.getAllByBookTitle(bookTitle).map( b -> {
             for (Comment comment : b){
                 if (comment.getAuthor().equals(author)) {
                     commentRepository.delete(comment);
-                    //commentRepository.delete(comment);
-                    return new ResponseEntity<String>("Comment authored by:" + author + " for book: " + bookTitle + " was deleted!", HttpStatus.OK);
+
+                    return new ResponseEntity<String>("Comment authored by: " + author + " for book: " + bookTitle + " was deleted!", HttpStatus.OK);
                 }
             }
-            return new ResponseEntity<String>("There is no comment authored by: " + author + " regading book: " + bookTitle, HttpStatus.OK);
+            return new ResponseEntity<String>("There is no comment authored by: " + author + " regarding book: " + bookTitle, HttpStatus.OK);
         }).orElseThrow(() -> new ResourceNotFoundException("Book: " + bookTitle + "do not exist!"));
     }
 

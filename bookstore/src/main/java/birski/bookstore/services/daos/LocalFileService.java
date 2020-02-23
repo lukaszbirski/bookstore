@@ -1,6 +1,6 @@
-package birski.bookstore.services;
+package birski.bookstore.services.daos;
 
-import birski.bookstore.models.LocalFileManager;
+import birski.bookstore.models.daos.LocalFileManager;
 import org.apache.logging.log4j.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

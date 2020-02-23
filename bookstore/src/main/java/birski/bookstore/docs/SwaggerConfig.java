@@ -16,6 +16,6 @@ public class SwaggerConfig {
 
     @Bean
     public Docket bookApi(){
-        return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("birski.bookstore.restcontrollers")).paths(regex(API_URL + "/.*")).build();
+        return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("birski.bookstore.restcontrollers.dto")).paths(regex(API_URL + "/.*")).build();
     }
 }

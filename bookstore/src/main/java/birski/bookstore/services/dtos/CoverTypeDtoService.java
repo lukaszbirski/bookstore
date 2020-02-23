@@ -69,5 +69,3 @@ public class CoverTypeDtoService {
         }).orElseThrow(() -> new ResourceNotFoundException("Cover Type name: " + name + " not found."));
     }
 }
-
-//todo poprawić zabezpeczenie przed stworzeniem dwóch takich samych rekordów w create i update

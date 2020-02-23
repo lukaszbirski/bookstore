@@ -1,7 +1,7 @@
-package birski.bookstore.restcontrollers;
+package birski.bookstore.restcontrollers.daos;
 
-import birski.bookstore.models.Book;
-import birski.bookstore.services.BookService;
+import birski.bookstore.models.daos.Book;
+import birski.bookstore.services.daos.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

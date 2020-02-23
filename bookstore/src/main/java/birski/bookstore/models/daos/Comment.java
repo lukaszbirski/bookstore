@@ -1,4 +1,4 @@
-package birski.bookstore.models;
+package birski.bookstore.models.daos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.NotNull;
@@ -14,16 +14,12 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     private String author;
 
-    @NotNull
     private String description;
 
-    @NotNull
     private float rating;
 
-    @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 

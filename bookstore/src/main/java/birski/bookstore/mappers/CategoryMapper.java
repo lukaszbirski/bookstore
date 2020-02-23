@@ -1,7 +1,7 @@
 package birski.bookstore.mappers;
 
-import birski.bookstore.models.Book;
-import birski.bookstore.models.Category;
+import birski.bookstore.models.daos.Book;
+import birski.bookstore.models.daos.Category;
 import birski.bookstore.models.dtos.CategoryDto;
 import org.springframework.stereotype.Component;
 

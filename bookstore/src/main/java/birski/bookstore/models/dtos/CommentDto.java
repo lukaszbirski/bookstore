@@ -14,8 +14,7 @@ public class CommentDto {
     @NotBlank(message = "Description is required")
     private String description;
 
-    @Digits(integer = 1, fraction = 1, message = "Invalid value")
-    @NotBlank(message = "Rating is required")
+    @Digits(integer = 1, fraction = 1, message = "Rating should be between 0 and 5")
     @Range(min = 0, max = 5, message = "Rating should be between 0 and 5")
     private float rating;
 

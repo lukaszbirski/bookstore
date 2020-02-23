@@ -1,7 +1,7 @@
 package birski.bookstore.mappers;
 
-import birski.bookstore.models.Book;
-import birski.bookstore.models.Category;
+import birski.bookstore.models.daos.Book;
+import birski.bookstore.models.daos.Category;
 import birski.bookstore.models.dtos.BookDto;
 import birski.bookstore.models.dtos.CommentDto;
 import org.springframework.stereotype.Component;
@@ -45,7 +45,10 @@ public class BookMapper implements Mapper<Book, BookDto>{
     //todo wykonać reversMapper dla Book
     @Override
     public Book reverse(BookDto to) {
-        return null;
+        Book book = new Book();
+        book.setAuthor(to.getAuthor());
+        book.setTitle(to.getTitle());
+        return book;
     }
 
     private enum CategoriesToString implements Function<Category, String>{

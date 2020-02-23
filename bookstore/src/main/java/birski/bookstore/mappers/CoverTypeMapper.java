@@ -1,7 +1,7 @@
 package birski.bookstore.mappers;
 
-import birski.bookstore.models.Book;
-import birski.bookstore.models.CoverType;
+import birski.bookstore.models.daos.Book;
+import birski.bookstore.models.daos.CoverType;
 import birski.bookstore.models.dtos.CoverTypeDto;
 import org.springframework.stereotype.Component;
 

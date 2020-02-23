@@ -1,7 +1,5 @@
 package birski.bookstore.restcontrollers.dtos;
 
-import birski.bookstore.models.Comment;
-import birski.bookstore.models.dtos.CategoryDto;
 import birski.bookstore.models.dtos.CommentDto;
 import birski.bookstore.services.dtos.CommentDtoService;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +19,11 @@ public class CommentDtoRestController {
 
     public CommentDtoRestController(CommentDtoService commentDtoService) {
         this.commentDtoService = commentDtoService;
+    }
+
+    @PostMapping()
+    public ResponseEntity<?> createCommentDto(@Valid @RequestBody CommentDto commentDto, BindingResult bindingResult){
+        return commentDtoService.createCommentDto(commentDto, bindingResult);
     }
 
     @GetMapping()
