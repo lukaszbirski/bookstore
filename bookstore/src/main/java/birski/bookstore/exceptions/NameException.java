@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class CoverTypeDtoNameException extends RuntimeException{
+public class NameException  extends RuntimeException{
 
-    public CoverTypeDtoNameException(String message) {
+    public NameException(String message) {
         super(message);
     }
 }

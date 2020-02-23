@@ -1,10 +1,10 @@
 package birski.bookstore.exceptions;
 
-public class CoverTypeDtoNameExceptionResponse {
+public class NameExceptionResponse {
 
-    private String name;
+    String name;
 
-    public CoverTypeDtoNameExceptionResponse(String name) {
+    public NameExceptionResponse(String name) {
         this.name = name;
     }
 

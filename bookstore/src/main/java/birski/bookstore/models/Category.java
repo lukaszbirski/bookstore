@@ -13,7 +13,6 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Field is required")
     @Column(unique = true)
     private String categoryName;
 

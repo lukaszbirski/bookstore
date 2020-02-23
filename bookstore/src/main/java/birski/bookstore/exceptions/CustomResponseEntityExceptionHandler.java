@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
 @RestController
-public class CustomResponseExceptionHandler extends ResponseEntityExceptionHandler {
+@ControllerAdvice
+public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
-    public final ResponseEntity<Object> handleCoverTypeNameException(CoverTypeDtoNameException ex, WebRequest request){
-        CoverTypeDtoNameExceptionResponse coverTypeDtoNameExceptionResponse = new CoverTypeDtoNameExceptionResponse(ex.getMessage());
-        return new ResponseEntity<>(coverTypeDtoNameExceptionResponse, HttpStatus.BAD_REQUEST);
+    public final ResponseEntity<Object> handleNameException(NameException exception, WebRequest webRequest){
+        NameExceptionResponse nameExceptionResponse = new NameExceptionResponse(exception.getMessage());
+        return new ResponseEntity(nameExceptionResponse, HttpStatus.BAD_REQUEST);
     }
+
 }

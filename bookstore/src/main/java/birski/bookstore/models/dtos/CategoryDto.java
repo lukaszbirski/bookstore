@@ -8,7 +8,6 @@ import java.util.List;
 public class CategoryDto {
 
     @NotBlank(message = "Field is required")
-    @Column(unique = true)
     private String categoryName;
     private List<String> books = new ArrayList<>();
 

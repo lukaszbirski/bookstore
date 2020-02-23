@@ -1,9 +1,8 @@
 package birski.bookstore.services.dtos;
 
-import birski.bookstore.exceptions.CoverTypeDtoNameException;
+import birski.bookstore.exceptions.NameException;
 import birski.bookstore.exceptions.ResourceNotFoundException;
 import birski.bookstore.mappers.CoverTypeMapper;
-import birski.bookstore.models.dtos.CategoryDto;
 import birski.bookstore.models.dtos.CoverTypeDto;
 import birski.bookstore.repositories.CoverTypeRepository;
 import birski.bookstore.services.validation.MapValidationErrorService;
@@ -42,10 +41,14 @@ public class CoverTypeDtoService {
     }
 
     public ResponseEntity<?> createCoverTypeDto(CoverTypeDto coverTypeDto, BindingResult bindingResult){
-        ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
-        if (errors != null) return errors;
-        coverTypeRepository.save(coverTypeMapper.reverse(coverTypeDto));
-        return new ResponseEntity<CoverTypeDto>(coverTypeDto, HttpStatus.CREATED);
+        try{
+            ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
+            if (errors != null) return errors;
+            coverTypeRepository.save(coverTypeMapper.reverse(coverTypeDto));
+            return new ResponseEntity<CoverTypeDto>(coverTypeDto, HttpStatus.CREATED);
+        }catch (Exception e){
+            throw new NameException("Category name " + coverTypeDto.getName() + " already exists");
+        }
     }
 
     public ResponseEntity<?> updateCoverTypeDto(String name, CoverTypeDto coverTypeDto, BindingResult bindingResult){
@@ -56,6 +59,7 @@ public class CoverTypeDtoService {
             coverTypeMapper.map(coverTypeRepository.save(c));
             return new ResponseEntity<CoverTypeDto>(coverTypeDto, HttpStatus.OK);
         }).orElseThrow(() -> new ResourceNotFoundException("Cover Type name: " + name + " not found."));
+
     }
 
     public ResponseEntity<?> deleteCoverTypeDto(String name){

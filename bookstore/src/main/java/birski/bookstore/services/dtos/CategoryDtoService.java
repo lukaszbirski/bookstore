@@ -1,5 +1,6 @@
 package birski.bookstore.services.dtos;
 
+import birski.bookstore.exceptions.NameException;
 import birski.bookstore.exceptions.ResourceNotFoundException;
 import birski.bookstore.mappers.CategoryMapper;
 import birski.bookstore.models.dtos.CategoryDto;
@@ -40,11 +41,15 @@ public class CategoryDtoService {
     }
 
     public ResponseEntity<?> createCategoryDto(CategoryDto categoryDto, BindingResult bindingResult){
-        ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
-        if (errors != null) return errors;
 
-        categoryRepository.save(categoryMapper.reverse(categoryDto));
-        return new ResponseEntity<CategoryDto>(categoryDto, HttpStatus.CREATED);
+        try{
+            ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
+            if (errors != null) return errors;
+            categoryRepository.save(categoryMapper.reverse(categoryDto));
+            return new ResponseEntity<CategoryDto>(categoryDto, HttpStatus.CREATED);
+        }catch (Exception e){
+            throw new NameException("Category name " + categoryDto.getCategoryName() + " already exists");
+        }
     }
 
     public ResponseEntity<?> updateCategoryDto(String categoryName, CategoryDto categoryDto, BindingResult bindingResult){
