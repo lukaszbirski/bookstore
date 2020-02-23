@@ -1,10 +1,5 @@
 package birski.bookstore.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
@@ -19,10 +14,16 @@ public class Category {
     private Long id;
 
     @NotBlank(message = "Field is required")
+    @Column(unique = true)
     private String categoryName;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "categories")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "books_categories",
+            joinColumns = {@JoinColumn(name = "categories_id")},
+            inverseJoinColumns = {@JoinColumn(name = "books_id")})
     private Set<Book> books = new HashSet<>();
 
     public Category() {

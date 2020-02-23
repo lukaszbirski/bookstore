@@ -26,14 +26,16 @@ public class Book {
     //@NotBlank(message = "Author is required")
     private String author;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "books_categories", joinColumns = {@JoinColumn(name = "books_id")},
-    inverseJoinColumns = {@JoinColumn(name = "categories_id")})
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "books_categories",
+            joinColumns = {@JoinColumn(name = "books_id")},
+            inverseJoinColumns = {@JoinColumn(name = "categories_id")})
     private Set<Category> categories = new HashSet<>();
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private CoverType coverType;
 
     //@NotBlank(message = "Publisher is required")
@@ -58,29 +60,11 @@ public class Book {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date releaseDate;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "book"
-            //, cascade = CascadeType.ALL
-    )
-    //@OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "book_id")
     private Set<Comment> comments = new HashSet<>();
 
     private String fileName;
-
-    public Book(String title, String author, Set<Category> categories, CoverType coverType, String publisher, String description, String ean, int pages, double price, Date releaseDate, Set<Comment> comments, String fileName) {
-        this.title = title;
-        this.author = author;
-        this.categories = categories;
-        this.coverType = coverType;
-        this.publisher = publisher;
-        this.description = description;
-        this.ean = ean;
-        this.pages = pages;
-        this.price = price;
-        this.releaseDate = releaseDate;
-        this.comments = comments;
-        this.fileName = fileName;
-    }
 
     public Book() {
     }

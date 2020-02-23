@@ -1,10 +1,7 @@
 package birski.bookstore.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,20 +27,18 @@ public class Comment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
-    @JsonIgnore //todo usunąć
-    @ManyToOne//(cascade = CascadeType.ALL)
-    @JoinColumn(name = "book_id", nullable = false)
-    //@OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Book book;
 
     public Comment() {
     }
 
-    public Comment(String author, String description, float rating, Date date) {
+    public Comment( String author, String description, float rating, Date date, Book book) {
         this.author = author;
         this.description = description;
         this.rating = rating;
         this.date = date;
+        this.book = book;
     }
 
     public Long getId() {

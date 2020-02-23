@@ -1,6 +1,5 @@
 package birski.bookstore.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -54,14 +53,5 @@ public class CoverType {
     public CoverType(String name, Set<Book> books) {
         this.name = name;
         this.books = books;
-    }
-
-    @Override
-    public String toString() {
-        return "CoverType{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", books=" + books +
-                '}';
     }
 }
