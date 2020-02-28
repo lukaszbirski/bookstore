@@ -55,35 +55,8 @@ public class BookDtoService {
             ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
             if (errors != null) return errors;
             Book book = bookMapper.reverse(bookDto);
-            CoverType coverType = coverTypeRepository.findCoverTypeByName(bookDto.getCoverType());
-            logger.info("cover type :" + coverType.toString());
-            book.setCoverType(coverType);
-            logger.info("cover type from book: " + book.getCoverType().toString());
-
-            Set<Category> categories = new HashSet<>();
-            bookDto.getCategories().forEach(c -> {
-                Category category = categoryRepository.findCategoryByCategoryName(c);
-                logger.info("Category: " + category.toString());
-                categories.add(category);
-            });
-            book.setCategories(categories);
-            book.getCategories().stream().forEach(c -> {
-                logger.info("Categories from book: " + c.toString());
-            });
-
-            bookRepository.save(book);
-
-            //Book result = bookRepository.save(book);
-
-            //logger.info("Book from DB: " + result.toString());
-            //BookDto bookDto1 = bookMapper.map(result);
-
-//            Book result = bookRepository.save(bookMapper.reverse(bookDto));
-//            if (result == null){
-//                logger.error("Error while save book to database!");
-//                return null;
-//            }
-            return new ResponseEntity<BookDto>(bookMapper.map(book), HttpStatus.CREATED);
+            Book result = bookRepository.save(book);
+            return new ResponseEntity<BookDto>(bookMapper.map(result), HttpStatus.CREATED);
         }catch (Exception e){
             throw new NameException("Book name " + bookDto.getTitle() + " already exists");
         }

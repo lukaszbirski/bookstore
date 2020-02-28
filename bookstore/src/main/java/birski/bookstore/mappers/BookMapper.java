@@ -89,7 +89,23 @@ public class BookMapper implements Mapper<Book, BookDto>{
         book.setFileName(to.getFileName());
         logger.info("FileName: " + book.getFileName());
 
-        //todo dodać categorie, typ, komentarze
+        CoverType coverType = coverTypeRepository.findCoverTypeByName(to.getCoverType());
+        logger.info("cover type :" + coverType.toString());
+        book.setCoverType(coverType);
+        logger.info("cover type from book: " + book.getCoverType().toString());
+
+        Set<Category> categories = new HashSet<>();
+        to.getCategories().forEach(c -> {
+            Category category = categoryRepository.findCategoryByCategoryName(c);
+            logger.info("Category: " + category.toString());
+            categories.add(category);
+        });
+        book.setCategories(categories);
+        book.getCategories().stream().forEach(c -> {
+            logger.info("Categories from book: " + c.toString());
+        });
+
+        //todo dodać komentarze
 
         return book;
     }
