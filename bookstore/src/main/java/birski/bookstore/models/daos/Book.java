@@ -20,13 +20,15 @@ public class Book {
     //@NotBlank(message = "Author is required")
     private String author;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+//                    CascadeType.ALL
     })
-    @JoinTable(name = "books_categories",
-            joinColumns = {@JoinColumn(name = "books_id")},
-            inverseJoinColumns = {@JoinColumn(name = "categories_id")})
+    @JoinTable(name = "book_categories",
+            joinColumns = {@JoinColumn(name = "book_id")},
+            inverseJoinColumns = {@JoinColumn(name = "category_id")})
     private Set<Category> categories = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

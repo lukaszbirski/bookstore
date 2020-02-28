@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-//@Scope(proxyMode = ScopedProxyMode.INTERFACES)
-//@Transactional
 public class BookService {
 
     private BookRepository bookRepository;

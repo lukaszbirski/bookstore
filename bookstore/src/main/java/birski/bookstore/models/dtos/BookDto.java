@@ -27,13 +27,13 @@ public class BookDto {
 
     @Size(min = 12, max = 13, message = "Ean number should have between 12 and 13 digits")
     @NotBlank(message = "Ean number is required")
-    @Pattern(regexp="\\d", message = "Ean number should have between 12 and 13 digits")
+    //@Pattern(regexp="\\d", message = "Ean number should have between 12 and 13 digits")
     private String ean;
 
-    @NotBlank(message = "Number of pages is required")
+    //@NotBlank(message = "Number of pages is required")
     private int pages;
 
-    @NotBlank(message = "Price is required")
+    //@NotBlank(message = "Price is required")
     @Digits(integer = 4, fraction = 2, message = "Invalid value")
     private double price;
 

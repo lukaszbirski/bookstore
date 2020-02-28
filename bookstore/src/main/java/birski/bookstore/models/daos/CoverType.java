@@ -1,5 +1,6 @@
 package birski.bookstore.models.daos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -20,6 +21,7 @@ public class CoverType {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "coverType", cascade = CascadeType.ALL)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Set<Book> books = new HashSet<>();
 
     public Long getId() {
@@ -52,5 +54,14 @@ public class CoverType {
     public CoverType(String name, Set<Book> books) {
         this.name = name;
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "CoverType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", books=" + books +
+                '}';
     }
 }

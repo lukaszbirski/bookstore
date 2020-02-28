@@ -4,17 +4,17 @@ values ('twarda');
 insert into covery_type("name")
 values ('miękka');
 --categories
-insert into category ("category_name")
+insert into categories ("category_name")
 values ('kryminał i sensacja');
-insert into category ("category_name")
+insert into categories ("category_name")
 values ('thriller');
-insert into category ("category_name")
+insert into categories ("category_name")
 values ('polscy autorzy');
-insert into category ("category_name")
+insert into categories ("category_name")
 values ('proza');
-insert into category ("category_name")
+insert into categories ("category_name")
 values ('proza polska');
-insert into category ("category_name")
+insert into categories ("category_name")
 values ('powieść');
 --books
 insert into books("title", "author", "cover_type_id", "description", "ean", "pages", "price", "publisher", "release_date", "file_name")
@@ -38,19 +38,19 @@ insert into comments("author", "date", "description", "rating", "book_id")
 values ('Czytelnik', '2018-12-22', 'Nie jest najgorsza, ale czytałem lepsze.', 3.5, 3);
 
 --books_categories
-insert into books_categories("books_id", "categories_id")
+insert into book_categories("book_id", "category_id")
 values (1, 1);
-insert into books_categories("books_id", "categories_id")
+insert into book_categories("book_id", "category_id")
 values (1, 2);
-insert into books_categories("books_id", "categories_id")
+insert into book_categories("book_id", "category_id")
 values (1, 3);
-insert into books_categories("books_id", "categories_id")
+insert into book_categories("book_id", "category_id")
 values (2, 1);
-insert into books_categories("books_id", "categories_id")
+insert into book_categories("book_id", "category_id")
 values (2, 2);
-insert into books_categories("books_id", "categories_id")
+insert into book_categories("book_id", "category_id")
 values (3, 4);
-insert into books_categories("books_id", "categories_id")
+insert into book_categories("book_id", "category_id")
 values (3, 5);
-insert into books_categories("books_id", "categories_id")
+insert into book_categories("book_id", "category_id")
 values (3, 6);

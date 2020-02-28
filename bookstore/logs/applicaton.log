@@ -1,0 +1,45 @@
+2020-02-27 21:27:06.258  INFO 13512 --- [main] birski.bookstore.BookstoreApplication    : Starting BookstoreApplication on DESKTOP-L89DOR5 with PID 13512 (started by lukas in C:\Dropbox\PW\J10\BOOKSTORE - SPRING + REACT\bookstore)
+2020-02-27 21:27:06.270  INFO 13512 --- [main] birski.bookstore.BookstoreApplication    : No active profile set, falling back to default profiles: default
+2020-02-27 21:27:14.905  INFO 13512 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-02-27 21:27:14.909  INFO 13512 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2020-02-27 21:27:15.175  INFO 13512 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface birski.bookstore.repositories.BookRepository. If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2020-02-27 21:27:15.183  INFO 13512 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface birski.bookstore.repositories.CategoryRepository. If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2020-02-27 21:27:15.192  INFO 13512 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface birski.bookstore.repositories.CommentRepository. If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2020-02-27 21:27:15.199  INFO 13512 --- [main] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface birski.bookstore.repositories.CoverTypeRepository. If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2020-02-27 21:27:15.204  INFO 13512 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 272ms. Found 0 JDBC repository interfaces.
+2020-02-27 21:27:15.250  INFO 13512 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-02-27 21:27:15.251  INFO 13512 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-02-27 21:27:15.636  INFO 13512 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 363ms. Found 4 JPA repository interfaces.
+2020-02-27 21:27:17.993  INFO 13512 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-02-27 21:27:20.735  INFO 13512 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-02-27 21:27:20.790  INFO 13512 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-27 21:27:20.796  INFO 13512 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-27 21:27:21.739  INFO 13512 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-27 21:27:21.741  INFO 13512 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 15153 ms
+2020-02-27 21:27:22.853  INFO 13512 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2020-02-27 21:27:23.457  INFO 13512 --- [main] org.hibernate.Version                    : HHH000412: Hibernate Core {5.4.10.Final}
+2020-02-27 21:27:24.459  INFO 13512 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-02-27 21:27:25.367  INFO 13512 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-02-27 21:27:26.123  INFO 13512 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-02-27 21:27:26.281  INFO 13512 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL10Dialect
+2020-02-27 21:27:31.628  INFO 13512 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-02-27 21:27:31.660  INFO 13512 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-02-27 21:27:34.008  INFO 13512 --- [main] b.b.services.daos.LocalFileService       : Path to uploaded file: /home/uploads/
+2020-02-27 21:27:35.784  INFO 13512 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-02-27 21:27:36.164  INFO 13512 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-27 21:27:36.687  WARN 13512 --- [main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-02-27 21:27:37.230  INFO 13512 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-02-27 21:27:37.307  INFO 13512 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-02-27 21:27:37.660  INFO 13512 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-02-27 21:27:38.423  INFO 13512 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteCategoryDtoUsingDELETE_1
+2020-02-27 21:27:38.803  INFO 13512 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-02-27 21:27:38.820  INFO 13512 --- [main] birski.bookstore.BookstoreApplication    : Started BookstoreApplication in 34.669 seconds (JVM running for 43.279)
+2020-02-27 21:28:06.141  INFO 13512 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-27 21:28:06.146  INFO 13512 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-27 21:28:06.184  INFO 13512 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 36 ms
+2020-02-27 21:28:06.916 ERROR 13512 --- [http-nio-8080-exec-1] birski.bookstore.mappers.BookMapper      : Error while getting Price!
+2020-02-27 21:28:51.050 ERROR 13512 --- [http-nio-8080-exec-2] birski.bookstore.mappers.BookMapper      : Error while getting Pages!
+2020-02-27 21:32:04.326  INFO 13512 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-02-27 21:32:04.335  INFO 13512 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2020-02-27 21:32:04.344  INFO 13512 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2020-02-27 21:32:04.370  INFO 13512 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

@@ -1,11 +1,13 @@
 package birski.bookstore.models.daos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "category", schema = "public")
+@Table(name = "categories", schema = "public")
 public class Category {
 
     @Id
@@ -15,13 +17,14 @@ public class Category {
     @Column(unique = true)
     private String categoryName;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "books_categories",
-            joinColumns = {@JoinColumn(name = "categories_id")},
-            inverseJoinColumns = {@JoinColumn(name = "books_id")})
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE,
+//                    CascadeType.REFRESH
+
+//                    CascadeType.ALL
+    }, mappedBy = "categories")
     private Set<Book> books = new HashSet<>();
 
     public Category() {
@@ -54,5 +57,14 @@ public class Category {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", categoryName='" + categoryName + '\'' +
+                ", books=" + books +
+                '}';
     }
 }
