@@ -21,9 +21,9 @@ public class CommentDtoRestController {
         this.commentDtoService = commentDtoService;
     }
 
-    @PostMapping()
-    public ResponseEntity<?> createCommentDto(@Valid @RequestBody CommentDto commentDto, BindingResult bindingResult){
-        return commentDtoService.createCommentDto(commentDto, bindingResult);
+    @PostMapping("/{name}")
+    public ResponseEntity<?> createCommentDto(@PathVariable ("name") String bookTitle, @Valid @RequestBody CommentDto commentDto, BindingResult bindingResult){
+        return commentDtoService.createCommentDto(commentDto, bindingResult, bookTitle);
     }
 
     @GetMapping()
@@ -50,11 +50,7 @@ public class CommentDtoRestController {
 //    public ResponseEntity<?> updateCommentDto(@PathVariable ("title") String title, @Valid @RequestBody CommentDto commentDto, BindingResult bindingResult){
 //        return commentDtoService.updateCommentDto(title, commentDto, bindingResult); //todo zastanowić się czy na pewno po tytule chcemu móc update'ować komentarz
 //    }
-//
-//    @DeleteMapping(NAME_URL) //todo zastanowić się po czym usuwać komentarze czy nie stworzyć np tytułu
-//    public ResponseEntity<?> deleteCommentDto(@PathVariable ("name") String name){
-//        return commentDtoService.deleteCommentDto(name);
-//    }
+
 }
 
 

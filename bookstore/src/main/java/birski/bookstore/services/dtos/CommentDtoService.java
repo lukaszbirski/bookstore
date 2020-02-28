@@ -2,8 +2,10 @@ package birski.bookstore.services.dtos;
 
 import birski.bookstore.exceptions.ResourceNotFoundException;
 import birski.bookstore.mappers.CommentMapper;
+import birski.bookstore.models.daos.Book;
 import birski.bookstore.models.daos.Comment;
 import birski.bookstore.models.dtos.CommentDto;
+import birski.bookstore.repositories.BookRepository;
 import birski.bookstore.repositories.CommentRepository;
 import birski.bookstore.services.validation.MapValidationErrorService;
 import org.springframework.http.HttpStatus;
@@ -20,17 +22,22 @@ public class CommentDtoService {
     private CommentRepository commentRepository;
     private CommentMapper commentMapper;
     private MapValidationErrorService mapValidationErrorService;
+    private BookRepository bookRepository;
 
-    public CommentDtoService(CommentRepository commentRepository, CommentMapper commentMapper, MapValidationErrorService mapValidationErrorService) {
+    public CommentDtoService(CommentRepository commentRepository, CommentMapper commentMapper, MapValidationErrorService mapValidationErrorService, BookRepository bookRepository) {
         this.commentRepository = commentRepository;
         this.commentMapper = commentMapper;
         this.mapValidationErrorService = mapValidationErrorService;
+        this.bookRepository = bookRepository;
     }
 
-    public ResponseEntity<?> createCommentDto(CommentDto commentDto, BindingResult bindingResult){
+    public ResponseEntity<?> createCommentDto(CommentDto commentDto, BindingResult bindingResult, String bookTitle){
         ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
         if (errors != null) return errors;
-        commentRepository.save(commentMapper.reverse(commentDto));
+        Book book = bookRepository.getBookByTitle(bookTitle);
+        Comment comment = commentMapper.reverse(commentDto);
+        comment.setBook(book);
+        commentRepository.save(comment);
         return new ResponseEntity<CommentDto>(commentDto, HttpStatus.CREATED);
     }
 
@@ -62,5 +69,5 @@ public class CommentDtoService {
             return new ResponseEntity<String>("There is no comment authored by: " + author + " regarding book: " + bookTitle, HttpStatus.OK);
         }).orElseThrow(() -> new ResourceNotFoundException("Book: " + bookTitle + "do not exist!"));
     }
-
+//todo stworzyć updatowanie komentarza
 }

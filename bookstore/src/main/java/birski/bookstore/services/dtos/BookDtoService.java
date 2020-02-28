@@ -33,18 +33,12 @@ public class BookDtoService {
     private static final Logger logger = LoggerFactory.getLogger(BookDtoService.class);
 
     private BookRepository bookRepository;
-    private CategoryRepository categoryRepository;
-    private CoverTypeRepository coverTypeRepository;
-    private CommentRepository commentRepository;
     private LocalFileService localFileService;
     private BookMapper bookMapper;
     private MapValidationErrorService mapValidationErrorService;
 
-    public BookDtoService(BookRepository bookRepository, CategoryRepository categoryRepository, CoverTypeRepository coverTypeRepository, CommentRepository commentRepository, BookMapper bookMapper, LocalFileService localFileService, MapValidationErrorService mapValidationErrorService) {
+    public BookDtoService(BookRepository bookRepository, BookMapper bookMapper, LocalFileService localFileService, MapValidationErrorService mapValidationErrorService) {
         this.bookRepository = bookRepository;
-        this.categoryRepository = categoryRepository;
-        this.coverTypeRepository = coverTypeRepository;
-        this.commentRepository = commentRepository;
         this.bookMapper = bookMapper;
         this.localFileService = localFileService;
         this.mapValidationErrorService = mapValidationErrorService;
@@ -75,6 +69,11 @@ public class BookDtoService {
         }).orElseThrow(() -> new ResourceNotFoundException("Book name: " + name + " not found"));
     }
 
+    //todo dokończyć updateBook
+    public ResponseEntity<?> updateBookDto(){
+        return null;
+    }
+
     public ResponseEntity<?> deleteBookDto(String bookTitle){
         return bookRepository.findByTitle(bookTitle).map(b ->{
             bookRepository.delete(b);
@@ -82,4 +81,3 @@ public class BookDtoService {
         }).orElseThrow(()-> new ResourceNotFoundException("Book with title: " + bookTitle + " have not been found."));
     }
 }
-//todo dokończyć CRUD

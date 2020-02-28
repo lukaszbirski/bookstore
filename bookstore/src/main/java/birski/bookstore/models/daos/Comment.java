@@ -1,7 +1,6 @@
 package birski.bookstore.models.daos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -83,5 +82,16 @@ public class Comment {
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", author='" + author + '\'' +
+                ", description='" + description + '\'' +
+                ", rating=" + rating +
+                ", date=" + date +
+                '}';
     }
 }

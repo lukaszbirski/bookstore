@@ -10,6 +10,7 @@ import birski.bookstore.models.dtos.CategoryDto;
 import birski.bookstore.models.dtos.CommentDto;
 import birski.bookstore.models.dtos.CoverTypeDto;
 import birski.bookstore.repositories.CategoryRepository;
+import birski.bookstore.repositories.CommentRepository;
 import birski.bookstore.repositories.CoverTypeRepository;
 import birski.bookstore.services.daos.CoverTypeService;
 import birski.bookstore.services.dtos.CoverTypeDtoService;
@@ -31,11 +32,13 @@ public class BookMapper implements Mapper<Book, BookDto>{
     private CommentMapper commentMapper;
     private CoverTypeRepository coverTypeRepository;
     private CategoryRepository categoryRepository;
+    private CommentRepository commentRepository;
 
-    public BookMapper(CommentMapper commentMapper, CoverTypeRepository coverTypeRepository, CategoryRepository categoryRepository) {
+    public BookMapper(CommentMapper commentMapper, CoverTypeRepository coverTypeRepository, CategoryRepository categoryRepository, CommentRepository commentRepository) {
         this.commentMapper = commentMapper;
         this.coverTypeRepository = coverTypeRepository;
         this.categoryRepository = categoryRepository;
+        this.commentRepository = commentRepository;
     }
 
     @Override
@@ -104,8 +107,12 @@ public class BookMapper implements Mapper<Book, BookDto>{
         book.getCategories().stream().forEach(c -> {
             logger.info("Categories from book: " + c.toString());
         });
-
-        //todo dodać komentarze
+        Set<Comment> comments = new HashSet<>();
+        comments = commentRepository.findAllByBookTitle(to.getTitle());
+        book.setComments(comments);
+        book.getComments().stream().forEach(c -> {
+            logger.info("Comment: " + c.toString());
+        });
 
         return book;
     }

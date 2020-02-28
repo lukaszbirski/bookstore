@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 @Component
 public class CoverTypeMapper implements Mapper<CoverType, CoverTypeDto>{
 
+    public CoverTypeMapper() {
+    }
+
     @Override
     public CoverTypeDto map(CoverType from) {
 

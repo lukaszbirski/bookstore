@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 @Component
 public class CategoryMapper implements Mapper<Category, CategoryDto> {
 
+    public CategoryMapper() {
+    }
+
     @Override
     public CategoryDto map(Category from) {
 
