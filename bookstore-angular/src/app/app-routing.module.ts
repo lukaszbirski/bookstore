@@ -5,6 +5,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { ErrorComponent } from './error/error.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ListCategoriesComponent} from './admin-panel/list-categories/list-categories.component';
+import { CategoryComponent } from './admin-panel/category/category.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'welcome/:name', component: WelcomeComponent},
   {path: 'admin', component: AdminPanelComponent},
   {path: 'admin/categories', component: ListCategoriesComponent},
+  {path: 'admin/categories/:categoryName', component: CategoryComponent},
 
 
   {path: '**', component: ErrorComponent}

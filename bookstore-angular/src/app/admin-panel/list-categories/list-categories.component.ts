@@ -65,4 +65,9 @@ export class ListCategoriesComponent implements OnInit {
     this.router.navigate(['admin/categories', categoryName])
   }
 
+  createCategory(){
+    //console.log("it works")
+    this.router.navigate(['admin/categories', ''])
+  }
+
 }

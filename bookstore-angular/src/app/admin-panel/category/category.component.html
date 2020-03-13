@@ -1,0 +1,10 @@
+<div class="container">
+    <h3>Category</h3>
+    <form (ngSubmit)="saveCategory()">
+        <fieldset class="form-group">
+            <label>Name:</label>
+            <input type="text" class="form-control" name="categoryName" required="required" [(ngModel)] = "category.categoryName">
+        </fieldset>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>

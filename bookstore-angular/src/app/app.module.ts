@@ -13,6 +13,7 @@ import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { ListCategoriesComponent } from './admin-panel/list-categories/list-categories.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CategoryComponent } from './admin-panel/category/category.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminPanelComponent,
     MenuComponent,
     FooterComponent,
-    ListCategoriesComponent
+    ListCategoriesComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
