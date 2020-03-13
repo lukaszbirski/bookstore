@@ -1,0 +1,22 @@
+<h1>List of categories</h1>
+<div class="container">
+    
+<div class="alert alert-success" *ngIf='messageCategoryDeleted'>{{messageCategoryDeleted}}</div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories">
+                <td>{{category.categoryName}}</td>
+                <td><button (click) = "updateCategory(category.categoryName)" class="btn btn-success">Update</button></td>
+                <td><button (click) = "deleteCategory(category.categoryName)" class="btn btn-warning">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -17,14 +17,15 @@ public class Category {
     @Column(unique = true)
     private String categoryName;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE,
-//                    CascadeType.REFRESH
-
-//                    CascadeType.ALL
-    }, mappedBy = "categories")
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinTable(name = "books_categories",
+            joinColumns = {@JoinColumn(name = "categories_id")},
+            inverseJoinColumns = {@JoinColumn(name = "books_id")})
     private Set<Book> books = new HashSet<>();
 
     public Category() {

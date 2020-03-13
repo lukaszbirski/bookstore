@@ -38,19 +38,19 @@ insert into comments("author", "date", "description", "rating", "book_id")
 values ('Czytelnik', '2018-12-22', 'Nie jest najgorsza, ale czytałem lepsze.', 3.5, 3);
 
 --books_categories
-insert into book_categories("book_id", "category_id")
+insert into books_categories("books_id", "categories_id")
 values (1, 1);
-insert into book_categories("book_id", "category_id")
+insert into books_categories("books_id", "categories_id")
 values (1, 2);
-insert into book_categories("book_id", "category_id")
+insert into books_categories("books_id", "categories_id")
 values (1, 3);
-insert into book_categories("book_id", "category_id")
+insert into books_categories("books_id", "categories_id")
 values (2, 1);
-insert into book_categories("book_id", "category_id")
+insert into books_categories("books_id", "categories_id")
 values (2, 2);
-insert into book_categories("book_id", "category_id")
+insert into books_categories("books_id", "categories_id")
 values (3, 4);
-insert into book_categories("book_id", "category_id")
+insert into books_categories("books_id", "categories_id")
 values (3, 5);
-insert into book_categories("book_id", "category_id")
+insert into books_categories("books_id", "categories_id")
 values (3, 6);

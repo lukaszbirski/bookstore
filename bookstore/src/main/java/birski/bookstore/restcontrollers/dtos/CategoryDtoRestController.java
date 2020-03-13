@@ -12,6 +12,7 @@ import java.util.List;
 import static birski.bookstore.configs.ApiConfig.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(API_URL + DTO_URL + CATEGORIES_URL)
 public class CategoryDtoRestController {
 
