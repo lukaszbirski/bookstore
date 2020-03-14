@@ -7,13 +7,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ErrorComponent } from './error/error.component';
-import { ListBooksComponent } from './list-books/list-books.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { ListCategoriesComponent } from './admin-panel/list-categories/list-categories.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoryComponent } from './admin-panel/category/category.component';
+import { ListCoverTypeComponent } from './admin-panel/list-cover-type/list-cover-type.component';
+import { ListCommentsComponent } from './admin-panel/list-comments/list-comments.component';
+import { ListBooksComponent } from './admin-panel/list-books/list-books.component';
+import { CoverTypeComponent } from './admin-panel/cover-type/cover-type.component'
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { CategoryComponent } from './admin-panel/category/category.component';
     MenuComponent,
     FooterComponent,
     ListCategoriesComponent,
-    CategoryComponent
+    CategoryComponent,
+    ListCoverTypeComponent,
+    ListCommentsComponent,
+    CoverTypeComponent
   ],
   imports: [
     BrowserModule,

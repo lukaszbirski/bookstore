@@ -28,6 +28,6 @@ export class CategoriesDataService {
   }
 
   deleteCategory(name){
-    return this.http.delete(`http://localhost:8080/api/dto/categories/${name}`)
+    return this.http.delete(`http://localhost:8080/api/dto/categories/${name}`);
   }
 }

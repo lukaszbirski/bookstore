@@ -1,7 +1,7 @@
 <h1>List of categories</h1>
 <div class="container">
     
-<div class="alert alert-success" *ngIf='messageCategoryDeleted'>{{messageCategoryDeleted}}</div>
+<!--<div class="alert alert-success" *ngIf='messageCategoryDeleted'>{{messageCategoryDeleted}}</div>-->
 
     <table class="table">
         <thead>
@@ -21,7 +21,7 @@
     </table>
 
     <div class="row">
-        <button (click) = "createCategory()" class="btn btn-primary">Create</button>
+        <button (click)="createCategory()" class="btn btn-primary">Create</button>
     </div>
 
 </div>

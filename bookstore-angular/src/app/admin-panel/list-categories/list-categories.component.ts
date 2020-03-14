@@ -22,11 +22,7 @@ export class Book {
 })
 export class ListCategoriesComponent implements OnInit {
 
-  categories: Category[]
-
-  messageCategoryDeleted: string
-
-  deleteResponse: string
+  public categories: Category[]
 
   constructor(
     private categoriesService : CategoriesDataService,
@@ -50,11 +46,7 @@ export class ListCategoriesComponent implements OnInit {
     console.log(`delete ${categoryName}`)
     this.categoriesService.deleteCategory(categoryName).subscribe(
       response => {
-        //console.log(response);
-        //this.deleteResponse = JSON.stringify(response);
-        //console.log(`Really deleted`);
-        //console.log(this.deleteResponse);
-        //this.messageCategoryDeleted = `Delete of category ${categoryName} successful!`;
+        
         this.refreshCategories();
       }
     )
@@ -66,8 +58,8 @@ export class ListCategoriesComponent implements OnInit {
   }
 
   createCategory(){
-    //console.log("it works")
     this.router.navigate(['admin/categories', ''])
   }
+
 
 }

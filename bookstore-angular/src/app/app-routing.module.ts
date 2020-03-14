@@ -6,7 +6,10 @@ import { ErrorComponent } from './error/error.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { ListCategoriesComponent} from './admin-panel/list-categories/list-categories.component';
 import { CategoryComponent } from './admin-panel/category/category.component';
-
+import { ListCoverTypeComponent } from './admin-panel/list-cover-type/list-cover-type.component';
+import { ListBooksComponent } from './admin-panel/list-books/list-books.component';
+import { ListCommentsComponent } from './admin-panel/list-comments/list-comments.component';
+import { CoverTypeComponent} from './admin-panel/cover-type/cover-type.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -15,6 +18,10 @@ const routes: Routes = [
   {path: 'admin', component: AdminPanelComponent},
   {path: 'admin/categories', component: ListCategoriesComponent},
   {path: 'admin/categories/:categoryName', component: CategoryComponent},
+  {path: 'admin/covertypes', component: ListCoverTypeComponent},
+  {path: 'admin/covertypes/:name', component: CoverTypeComponent},
+  {path: 'admin/books', component: ListBooksComponent},
+  {path: 'admin/comments', component: ListCommentsComponent},
 
 
   {path: '**', component: ErrorComponent}

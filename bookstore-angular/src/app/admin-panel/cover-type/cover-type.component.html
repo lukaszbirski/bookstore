@@ -1,0 +1,10 @@
+<div class="container">
+    <h3>Cover Type</h3>
+    <form (ngSubmit)="saveCoverType()">
+        <fieldset class="form-group">
+            <label>Name:</label>
+            <input type="text" class="form-control" name="name" required="required" [(ngModel)] = "coverType.name">
+        </fieldset>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</div>
