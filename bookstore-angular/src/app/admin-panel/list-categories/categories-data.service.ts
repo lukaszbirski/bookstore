@@ -8,7 +8,7 @@ import { Category } from './list-categories.component';
 export class CategoriesDataService {
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
   retrieveAllCategories(){

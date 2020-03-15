@@ -16,7 +16,9 @@ import { CategoryComponent } from './admin-panel/category/category.component';
 import { ListCoverTypeComponent } from './admin-panel/list-cover-type/list-cover-type.component';
 import { ListCommentsComponent } from './admin-panel/list-comments/list-comments.component';
 import { ListBooksComponent } from './admin-panel/list-books/list-books.component';
-import { CoverTypeComponent } from './admin-panel/cover-type/cover-type.component'
+import { CoverTypeComponent } from './admin-panel/cover-type/cover-type.component';
+import { BookDetailsComponent } from './admin-panel/book-details/book-details.component';
+import { BookComponent } from './admin-panel/book/book.component'
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { CoverTypeComponent } from './admin-panel/cover-type/cover-type.componen
     CategoryComponent,
     ListCoverTypeComponent,
     ListCommentsComponent,
-    CoverTypeComponent
+    CoverTypeComponent,
+    BookDetailsComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,

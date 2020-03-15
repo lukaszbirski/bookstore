@@ -1,1 +1,34 @@
-<p>list-books works!</p>
+<h1>List of books</h1>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Categories</th>
+                <th>Description</th>
+                <th>Release Date</th>
+                <th>Price</th>
+                <th>Details</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of books">
+                <td>{{book.title}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.categories.join(', ')}}</td>
+                <td>{{book.description}}</td>
+                <td>{{book.releaseDate}}</td>
+                <td>{{book.price}} zł</td>
+                <td><button (click)="getBookDetails(book.title)" class="btn btn-success">Details</button></td>
+                <td><button (click)="deleteBook(book.title)" class="btn btn-danger">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+        <button (click)="createBook()" class="btn btn-primary">Create</button>
+    </div>
+
+</div>

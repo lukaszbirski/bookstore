@@ -25,7 +25,7 @@ export class ListCoverTypeComponent implements OnInit {
   public coverTypes: CoverType[]
 
   constructor(
-    private coveTypeService : CoverTypeDataService,
+    private coverTypeService : CoverTypeDataService,
     private router : Router
   ) { }
 
@@ -34,7 +34,7 @@ export class ListCoverTypeComponent implements OnInit {
   }
 
   refreshCoverTypes(){
-    this.coveTypeService.retrieveAllCoverTypes().subscribe(
+    this.coverTypeService.retrieveAllCoverTypes().subscribe(
       response => {
         console.log(response);
         this.coverTypes = response;
@@ -44,7 +44,7 @@ export class ListCoverTypeComponent implements OnInit {
 
   deleteCoverType(name){
     console.log(`delete ${name}`)
-    this.coveTypeService.deleteCoverType(name).subscribe(
+    this.coverTypeService.deleteCoverType(name).subscribe(
       response => {
         
         this.refreshCoverTypes();
