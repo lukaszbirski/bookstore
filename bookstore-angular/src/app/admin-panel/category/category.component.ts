@@ -10,37 +10,39 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class CategoryComponent implements OnInit {
 
-  categoryName: string
-  category: Category
+  categoryName: string;
+  category: Category;
 
   constructor(
     private categoryService: CategoriesDataService,
-    private route: ActivatedRoute ,
+    private route: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.categoryName = this.route.snapshot.params['categoryName'];
+    this.categoryName = this.route.snapshot.params.categoryName;
     this.category = new Category(this.categoryName, []);
-    if(this.categoryName != '')
+    // tslint:disable-next-line:triple-equals
+    if (this.categoryName != '') {
     this.categoryService.retrieveCategory(this.categoryName).subscribe(
       data => this.category = data
-    )
+    );
+    }
   }
 
-  saveCategory(){
-    if(this.categoryName === ''){
+  saveCategory() {
+    if (this.categoryName === '') {
       this.categoryService.createCategory(this.categoryName, this.category).subscribe(
         data => {
-          this.router.navigate(['admin/categories'])
+          this.router.navigate(['admin/categories']);
         }
-      )
-    }else{
+      );
+    } else {
       this.categoryService.updateCategory(this.categoryName, this.category).subscribe(
         data => {
-          this.router.navigate(['admin/categories'])
+          this.router.navigate(['admin/categories']);
         }
-      )
+      );
     }
   }
 }

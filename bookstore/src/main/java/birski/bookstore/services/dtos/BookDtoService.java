@@ -22,9 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional
@@ -44,18 +42,6 @@ public class BookDtoService {
         this.mapValidationErrorService = mapValidationErrorService;
     }
 
-    public ResponseEntity<?> createBookDto(BookDto bookDto, BindingResult bindingResult){
-        try{
-            ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
-            if (errors != null) return errors;
-            Book book = bookMapper.reverse(bookDto);
-            Book result = bookRepository.save(book);
-            return new ResponseEntity<BookDto>(bookMapper.map(result), HttpStatus.CREATED);
-        }catch (Exception e){
-            throw new NameException("Book name " + bookDto.getTitle() + " already exists");
-        }
-    }
-
     public List<BookDto> getBooksDto(){
         List<BookDto> bookDtos = new ArrayList<>();
         bookRepository.findAll().forEach(b -> bookDtos.add(bookMapper.map(b)));
@@ -69,9 +55,29 @@ public class BookDtoService {
         }).orElseThrow(() -> new ResourceNotFoundException("Book name: " + name + " not found"));
     }
 
-    //todo dokończyć updateBook
-    public ResponseEntity<?> updateBookDto(){
-        return null;
+    public ResponseEntity<?> createBookDto(BookDto bookDto, BindingResult bindingResult){
+        try{
+            ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
+            if (errors != null) return errors;
+            Book book = bookMapper.reverse(bookDto);
+            Book result = bookRepository.save(book);
+            return new ResponseEntity<BookDto>(bookMapper.map(result), HttpStatus.CREATED);
+        }catch (Exception e){
+            throw new NameException("Book name " + bookDto.getTitle() + " already exists");
+        }
+    }
+
+    public ResponseEntity<?> updateBookDto(String bookTitle, BookDto bookDto, BindingResult bindingResult){
+        ResponseEntity<?> error = mapValidationErrorService.MapValidationService(bindingResult);
+        if (error != null) return error;
+        return bookRepository.findByTitle(bookTitle).map(b -> {
+            Book book = bookMapper.reverse(bookDto);
+            book.setId(b.getId());
+            logger.info("---BOOK: " + book.toString() + "---");
+            bookRepository.save(book);
+            BookDto response = bookMapper.map(bookRepository.save(book));
+            return new ResponseEntity<BookDto>(response, HttpStatus.CREATED);
+        }).orElseThrow(() -> new ResourceNotFoundException("Book titled: " + bookTitle + "not found."));
     }
 
     public ResponseEntity<?> deleteBookDto(String bookTitle){

@@ -11,23 +11,23 @@ export class CategoriesDataService {
     private http: HttpClient
   ) { }
 
-  retrieveAllCategories(){
+  retrieveAllCategories() {
     return this.http.get<Category[]>(`http://localhost:8080/api/dto/categories`);
   }
 
-  retrieveCategory(name){
-    return this.http.get<Category>(`http://localhost:8080/api/dto/categories/${name}`)
+  retrieveCategory(name) {
+    return this.http.get<Category>(`http://localhost:8080/api/dto/categories/${name}`);
   }
 
-  createCategory(name, category){
-    return this.http.post(`http://localhost:8080/api/dto/categories/${name}`, category)
+  createCategory(name, category) {
+    return this.http.post(`http://localhost:8080/api/dto/categories/${name}`, category);
   }
 
-  updateCategory(name, category){
-    return this.http.put(`http://localhost:8080/api/dto/categories/${name}`, category)
+  updateCategory(name, category) {
+    return this.http.put(`http://localhost:8080/api/dto/categories/${name}`, category);
   }
 
-  deleteCategory(name){
+  deleteCategory(name) {
     return this.http.delete(`http://localhost:8080/api/dto/categories/${name}`);
   }
 }

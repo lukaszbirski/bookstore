@@ -68,17 +68,17 @@ public class BookMapper implements Mapper<Book, BookDto>{
     public Book reverse(BookDto to) {
         Book book = new Book();
         book.setAuthor(to.getAuthor());
-        logger.info("Author: " + book.getAuthor());
+        //logger.info("Author: " + book.getAuthor());
         book.setTitle(to.getTitle());
-        logger.info("Title: " + book.getTitle());
+        //logger.info("Title: " + book.getTitle());
         book.setPublisher(to.getPublisher());
-        logger.info("Publisher: " + book.getPublisher());
+        //logger.info("Publisher: " + book.getPublisher());
         book.setDescription(to.getDescription());
-        logger.info("Description: " + book.getDescription());
+        //logger.info("Description: " + book.getDescription());
         book.setEan(to.getEan());
-        logger.info("Ean:" + book.getEan());
+        //logger.info("Ean:" + book.getEan());
         book.setPrice(to.getPrice());
-        logger.info("Price: " + book.getPrice());
+        //logger.info("Price: " + book.getPrice());
         Date date = null;
         try {
             date = new SimpleDateFormat("yyyy-MM-dd").parse(to.getReleaseDate());
@@ -86,32 +86,32 @@ public class BookMapper implements Mapper<Book, BookDto>{
             e.printStackTrace();
         }
         book.setReleaseDate(date);
-        logger.info("Date: " + book.getReleaseDate());
+        //logger.info("Date: " + book.getReleaseDate());
         book.setPages(to.getPages());
-        logger.info("Pages: " + book.getPages());
+        //logger.info("Pages: " + book.getPages());
         book.setFileName(to.getFileName());
-        logger.info("FileName: " + book.getFileName());
+        //logger.info("FileName: " + book.getFileName());
 
         CoverType coverType = coverTypeRepository.findCoverTypeByName(to.getCoverType());
-        logger.info("cover type :" + coverType.toString());
+        //logger.info("cover type :" + coverType.toString());
         book.setCoverType(coverType);
-        logger.info("cover type from book: " + book.getCoverType().toString());
+        //logger.info("cover type from book: " + book.getCoverType().toString());
 
         Set<Category> categories = new HashSet<>();
         to.getCategories().forEach(c -> {
             Category category = categoryRepository.findCategoryByCategoryName(c);
-            logger.info("Category: " + category.toString());
+            //logger.info("Category: " + category.toString());
             categories.add(category);
         });
         book.setCategories(categories);
         book.getCategories().stream().forEach(c -> {
-            logger.info("Categories from book: " + c.toString());
+            //logger.info("Categories from book: " + c.toString());
         });
         Set<Comment> comments = new HashSet<>();
         comments = commentRepository.findAllByBookTitle(to.getTitle());
         book.setComments(comments);
         book.getComments().stream().forEach(c -> {
-            logger.info("Comment: " + c.toString());
+            //logger.info("Comment: " + c.toString());
         });
 
         return book;

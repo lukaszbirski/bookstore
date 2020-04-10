@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Comment } from '@angular/compiler';
+
 import { BooksDataService } from './books-data.service';
 import { Router } from '@angular/router';
+import {Comment} from '../list-comments/list-comments.component';
 
 export class Book {
   constructor(
@@ -17,7 +18,7 @@ export class Book {
     public publisher: string,
     public releaseDate: string,
     public comments: Comment[]
-  ){}
+  ) {}
 }
 
 @Component({
@@ -27,40 +28,40 @@ export class Book {
 })
 export class ListBooksComponent implements OnInit {
 
-  public books: Book[]
+  public books: Book[];
 
   constructor(
-    private bookService : BooksDataService,
-    private router : Router
+    private bookService: BooksDataService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.refreshBooks();
   }
 
-  refreshBooks(){
+  refreshBooks() {
     this.bookService.retrieveAllBooks().subscribe(
       response => {
-        console.log(response)
+        console.log(response);
         this.books = response;
       }
-    )
+    );
   }
 
-  createBook(){
-    this.router.navigate(['admin/books', ''])
+  createBook() {
+    this.router.navigate(['admin/books', '']);
   }
 
-  deleteBook(bookTitle){
+  deleteBook(bookTitle) {
     this.bookService.deleteBook(bookTitle).subscribe(
       response => {
         this.refreshBooks();
       }
-    )
+    );
   }
 
-  getBookDetails(title){
-    this.router.navigate(['admin/books/details', title])
+  getBookDetails(bookTitle) {
+    this.router.navigate(['admin/books/details', bookTitle]);
   }
 
 }

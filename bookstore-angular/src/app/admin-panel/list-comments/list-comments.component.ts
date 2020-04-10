@@ -8,7 +8,7 @@ export class Comment {
     public date: string,
     public description: string,
     public rating: number,
-  ){}
+  ) {}
 }
 
 @Component({
@@ -18,32 +18,32 @@ export class Comment {
 })
 export class ListCommentsComponent implements OnInit {
 
-  public comments: Comment[]
+  public comments: Comment[];
 
   constructor(
-    private commentsService : CommentDataService 
+    private commentsService: CommentDataService
   ) { }
 
   ngOnInit(): void {
     this.refreshComments();
   }
 
-  refreshComments(){
+  refreshComments() {
       this.commentsService.retrieveAllComments().subscribe(
         response => {
           console.log(response);
           this.comments = response;
         }
-      )
+      );
   }
 
-  deleteComment(bookTitle, author){
-    console.log(`delete ${bookTitle}, ${author}`)
+  deleteComment(bookTitle, author) {
+    console.log(`delete ${bookTitle}, ${author}`);
     this.commentsService.deleteComment(bookTitle, author).subscribe(
       response => {
         this.refreshComments();
       }
-    )
+    );
   }
 
 }

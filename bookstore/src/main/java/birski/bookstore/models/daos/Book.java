@@ -13,11 +13,9 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //@NotBlank(message = "Title is required")
     @Column(unique = true)
     private String title;
 
-    //@NotBlank(message = "Author is required")
     private String author;
 
     @ManyToMany(cascade = {
@@ -32,25 +30,16 @@ public class Book {
     @ManyToOne(fetch = FetchType.LAZY)
     private CoverType coverType;
 
-    //@NotBlank(message = "Publisher is required")
     private String publisher;
 
-    //@NotBlank(message = "Description is required")
     private String description;
 
-    //@Size(min = 12, max = 13, message = "Ean number should have between 12 and 13 digits")
-    //@NotBlank(message = "Ean number is required")
-    //@Pattern(regexp="\\d", message = "Ean number should have between 12 and 13 digits")
     private String ean;
 
-    //@NotBlank(message = "Number of pages is required")
     private int pages;
 
-    //@NotBlank(message = "Price is required")
-    //@Digits(integer = 4, fraction = 2, message = "Invalid value")
     private double price;
 
-    //@NotBlank(message = "Release date is required")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date releaseDate;
 
@@ -165,5 +154,21 @@ public class Book {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", description='" + description + '\'' +
+                ", ean='" + ean + '\'' +
+                ", pages=" + pages +
+                ", price=" + price +
+                ", releaseDate=" + releaseDate +
+                ", fileName='" + fileName + '\'' +
+                '}';
     }
 }

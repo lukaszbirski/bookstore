@@ -38,10 +38,10 @@ public class BookDtoRestController {
         return bookDtoService.getBookDto(name);
     }
 
-//    @PutMapping("/{name}")
-//    public ResponseEntity<?> updateBookDto(@PathVariable ("name") String bookName, @Valid @RequestBody BookDto bookDto, BindingResult bindingResult){
-//        return bookDtoService.updateBookDto(bookName, bookDto, bindingResult);
-//    }
+    @PutMapping("/{name}")
+    public ResponseEntity<?> updateBookDto(@PathVariable ("name") String bookName, @Valid @RequestBody BookDto bookDto, BindingResult bindingResult){
+        return bookDtoService.updateBookDto(bookName, bookDto, bindingResult);
+    }
 
     @DeleteMapping(NAME_URL)
     public ResponseEntity<?> deleteBookDto(@PathVariable("name") String bookTitle){

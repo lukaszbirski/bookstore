@@ -6,13 +6,13 @@ export class Category {
   constructor(
       public categoryName: string,
       public books: Book[],
-  ){}
+  ) {}
 }
 
 export class Book {
   constructor(
       public name: string,
-  ){}
+  ) {}
 }
 
 @Component({
@@ -22,43 +22,43 @@ export class Book {
 })
 export class ListCategoriesComponent implements OnInit {
 
-  public categories: Category[]
+  public categories: Category[];
 
   constructor(
-    private categoriesService : CategoriesDataService,
-    private router : Router
+    private categoriesService: CategoriesDataService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     this.refreshCategories();
   }
 
-  refreshCategories(){
+  refreshCategories() {
     this.categoriesService.retrieveAllCategories().subscribe(
       response => {
         console.log(response);
         this.categories = response;
       }
-    )
+    );
   }
 
-  deleteCategory(categoryName){
-    console.log(`delete ${categoryName}`)
+  deleteCategory(categoryName) {
+    console.log(`delete ${categoryName}`);
     this.categoriesService.deleteCategory(categoryName).subscribe(
       response => {
-        
+
         this.refreshCategories();
       }
-    )
+    );
   }
 
-  updateCategory(categoryName){
+  updateCategory(categoryName) {
     console.log(`update ${categoryName}`);
-    this.router.navigate(['admin/categories', categoryName])
+    this.router.navigate(['admin/categories', categoryName]);
   }
 
-  createCategory(){
-    this.router.navigate(['admin/categories', ''])
+  createCategory() {
+    this.router.navigate(['admin/categories', '']);
   }
 
 
