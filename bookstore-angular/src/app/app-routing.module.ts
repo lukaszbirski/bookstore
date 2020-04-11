@@ -16,7 +16,8 @@ import { BookComponent } from './admin-panel/book/book.component';
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'welcome/:name', component: WelcomeComponent},
+  {path: 'welcome', component: WelcomeComponent},
+  {path: 'welcome/:category', component: WelcomeComponent},
   {path: 'admin', component: AdminPanelComponent},
   {path: 'admin/categories', component: ListCategoriesComponent},
   {path: 'admin/categories/:categoryName', component: CategoryComponent},

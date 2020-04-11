@@ -30,4 +30,8 @@ export class BooksDataService {
   updateBook(title, book) {
     return this.http.put(`http://localhost:8080/api/dto/books/${title}`, book);
   }
+
+  retrieveBooksByCategory(category) {
+    return this.http.get<Book[]>(`http://localhost:8080/api/dto/books/category/${category}`);
+  }
 }

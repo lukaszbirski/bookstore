@@ -155,20 +155,4 @@ public class Book {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", description='" + description + '\'' +
-                ", ean='" + ean + '\'' +
-                ", pages=" + pages +
-                ", price=" + price +
-                ", releaseDate=" + releaseDate +
-                ", fileName='" + fileName + '\'' +
-                '}';
-    }
 }

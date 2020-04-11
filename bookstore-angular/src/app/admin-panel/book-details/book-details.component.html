@@ -1,14 +1,14 @@
 <h1>Book details:</h1>
 <div class="container">
-    <table class="table">
+    <table class="table table-borderless">
         <thead>
             <tr>
-                <th [attr.colspan]="3"><h4>{{book.title}}</h4></th>
+                <th [attr.colspan]="3" class="text-center"><h4>{{book.title}}</h4></th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td [attr.rowspan] = "9">{{book.fileName}}</td>
+                <td [attr.rowspan] = "9"><img src="assets/books/{{book.fileName}}" class="rounded mx-auto d-block" width="270" height="420"></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -44,11 +44,11 @@
                 <td><button (click)="updateBook(book.title)" class="btn btn-warning">Update</button></td>
                 <td><button (click)="deleteBook(book.title)" class="btn btn-danger">Delete</button></td>
             </tr>
-        </tbody> 
+        </tbody>
     </table>
 </div>
 <div class="container">
-    <table class="table">
+    <table class="table table-borderless">
         <thead>
             <tr>
                 <th [attr.colspan]="4"><h3>Comments:</h3></th>

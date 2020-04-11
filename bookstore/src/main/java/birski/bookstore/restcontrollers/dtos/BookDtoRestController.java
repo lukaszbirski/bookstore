@@ -38,6 +38,12 @@ public class BookDtoRestController {
         return bookDtoService.getBookDto(name);
     }
 
+    @GetMapping("/category/{category}")
+        public List<BookDto> getBooksDtoByCategory(@PathVariable ("category") String category){
+        return bookDtoService.getBooksDtoByCategory(category);
+    }
+
+
     @PutMapping("/{name}")
     public ResponseEntity<?> updateBookDto(@PathVariable ("name") String bookName, @Valid @RequestBody BookDto bookDto, BindingResult bindingResult){
         return bookDtoService.updateBookDto(bookName, bookDto, bindingResult);
@@ -48,7 +54,7 @@ public class BookDtoRestController {
         return bookDtoService.deleteBookDto(bookTitle);
     }
 }
-//todo dokończyć CRUD
+
 
 
 

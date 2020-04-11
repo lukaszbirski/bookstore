@@ -1,6 +1,26 @@
-<h1>Welcome!</h1>
-<div class="container">
+<div class="container" >
+  <div *ngFor="let book of books" class="w-25 p-3 h-25 d-inline-block" >
 
-   Welcome {{name}}. Welcome to our awesome App. You can manage your admin staff <a routerLink="/admin">here</a>
-
-</div> 
+    <table class="table table-borderless">
+      <tbody class="text-center">
+      <tr>
+        <td><img src="assets/books/{{book.fileName}}" class="rounded mx-auto d-block" width="180" height="280"></td>
+      </tr>
+      <tr>
+        <td class="font-weight-bold">{{book.title}}</td>
+      </tr>
+      <tr>
+        <td>{{book.author}}</td>
+      </tr>
+      <tr>
+        <td class="font-weight-bold text-danger">{{book.price}} zł</td>
+      </tr>
+      <tr>
+        <td><button class="btn btn-danger btn-lg btn-block"><img src="assets/img/shopping_cart-24px.png"></button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--<button (click)="deleteBook(book.title)" class="btn btn-danger">Delete</button>-->
+<!--<img src="assets/img/shopping_cart-24px.png">-->

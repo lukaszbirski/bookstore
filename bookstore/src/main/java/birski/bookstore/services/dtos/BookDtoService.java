@@ -31,15 +31,17 @@ public class BookDtoService {
     private static final Logger logger = LoggerFactory.getLogger(BookDtoService.class);
 
     private BookRepository bookRepository;
+    private CategoryRepository categoryRepository;
     private LocalFileService localFileService;
     private BookMapper bookMapper;
     private MapValidationErrorService mapValidationErrorService;
 
-    public BookDtoService(BookRepository bookRepository, BookMapper bookMapper, LocalFileService localFileService, MapValidationErrorService mapValidationErrorService) {
+    public BookDtoService(BookRepository bookRepository, BookMapper bookMapper, LocalFileService localFileService, MapValidationErrorService mapValidationErrorService, CategoryRepository categoryRepository) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
         this.localFileService = localFileService;
         this.mapValidationErrorService = mapValidationErrorService;
+        this.categoryRepository = categoryRepository;
     }
 
     public List<BookDto> getBooksDto(){
@@ -84,6 +86,17 @@ public class BookDtoService {
         return bookRepository.findByTitle(bookTitle).map(b ->{
             bookRepository.delete(b);
             return new ResponseEntity<>("Book with title: " + bookTitle + " was deleted!", HttpStatus.OK);
-        }).orElseThrow(()-> new ResourceNotFoundException("Book with title: " + bookTitle + " have not been found."));
+        }).orElseThrow(()-> new ResourceNotFoundException("Book with title: " + bookTitle + " has not been found."));
+    }
+
+    public List<BookDto> getBooksDtoByCategory(String category){
+        List<BookDto> bookDtos = new ArrayList<>();
+        categoryRepository.getCategoryByCategoryName(category).map(c -> {
+                        for (Book book : c.getBooks()){
+                bookDtos.add(bookMapper.map(book));
+            }
+            return bookDtos;
+        }).orElseThrow(() -> new ResourceNotFoundException("No books have been found for category: " + category));
+        return bookDtos;
     }
 }
