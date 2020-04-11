@@ -1,0 +1,75 @@
+<div class="container">
+  <table class="table table-borderless" >
+    <thead>
+    <tr>
+      <th [attr.colspan]="3" class="text-center"><h2>{{book.title}}</h2></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td [attr.rowspan] = "9"><img src="assets/books/{{book.fileName}}" class="rounded mx-auto d-block" width="270" height="420"></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Categories:</td>
+      <td>{{book.categories.join(', ')}}</td>
+    </tr>
+    <tr>
+      <td>Cover type:</td>
+      <td>{{book.coverType}}</td>
+    </tr>
+    <tr>
+      <td>Publisher:</td>
+      <td>{{book.publisher}}</td>
+    </tr>
+    <tr>
+      <td>EAN:</td>
+      <td>{{book.ean}}</td>
+    </tr>
+    <tr>
+      <td>Number of pages:</td>
+      <td>{{book.pages}}</td>
+    </tr>
+    <tr>
+      <td>Release date:</td>
+      <td>{{book.releaseDate}}</td>
+    </tr>
+    <tr>
+      <td>Price:</td>
+      <td class="font-weight-bold text-danger"><h3>{{book.price}} zł</h3></td>
+    </tr>
+    <tr>
+      <td><button class="btn btn-danger btn-lg btn-block"><img src="assets/img/shopping_cart-24px.png"></button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container" *ngIf="book.comments.length != 0">
+  <table class="table table-borderless">
+    <thead>
+    <tr>
+      <th [attr.colspan]="4"><h3>Comments:</h3></th>
+    </tr>
+    <tr>
+      <th>Author</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let comment of book.comments">
+      <td>{{comment.author}}</td>
+      <td>{{comment.date}}</td>
+      <td>{{comment.description}}</td>
+      <td>{{comment.rating}}/5</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+</div>

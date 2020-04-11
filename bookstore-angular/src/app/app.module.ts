@@ -18,7 +18,8 @@ import { ListCommentsComponent } from './admin-panel/list-comments/list-comments
 import { ListBooksComponent } from './admin-panel/list-books/list-books.component';
 import { CoverTypeComponent } from './admin-panel/cover-type/cover-type.component';
 import { BookDetailsComponent } from './admin-panel/book-details/book-details.component';
-import { BookComponent } from './admin-panel/book/book.component'
+import { BookComponent } from './admin-panel/book/book.component';
+import { BookCustomerComponent } from './welcome/book-customer/book-customer.component'
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { BookComponent } from './admin-panel/book/book.component'
     ListCommentsComponent,
     CoverTypeComponent,
     BookDetailsComponent,
-    BookComponent
+    BookComponent,
+    BookCustomerComponent
   ],
   imports: [
     BrowserModule,

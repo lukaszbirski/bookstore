@@ -4,10 +4,10 @@
     <table class="table table-borderless">
       <tbody class="text-center">
       <tr>
-        <td><img src="assets/books/{{book.fileName}}" class="rounded mx-auto d-block" width="180" height="280"></td>
+        <td routerLink="/../../welcome/books/{{book.title}}"><img src="assets/books/{{book.fileName}}" class="rounded mx-auto d-block" width="180" height="280"></td>
       </tr>
       <tr>
-        <td class="font-weight-bold">{{book.title}}</td>
+        <td routerLink="/../../welcome/books/{{book.title}}" class="font-weight-bold">{{book.title}}</td>
       </tr>
       <tr>
         <td>{{book.author}}</td>
@@ -22,5 +22,3 @@
     </table>
   </div>
 </div>
-<!--<button (click)="deleteBook(book.title)" class="btn btn-danger">Delete</button>-->
-<!--<img src="assets/img/shopping_cart-24px.png">-->

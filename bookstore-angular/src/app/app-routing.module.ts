@@ -12,6 +12,7 @@ import { ListCommentsComponent } from './admin-panel/list-comments/list-comments
 import { CoverTypeComponent} from './admin-panel/cover-type/cover-type.component';
 import { BookDetailsComponent} from './admin-panel/book-details/book-details.component';
 import { BookComponent } from './admin-panel/book/book.component';
+import {BookCustomerComponent} from './welcome/book-customer/book-customer.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'admin/comments', component: ListCommentsComponent},
   {path: 'admin/books/details/:title', component: BookDetailsComponent},
   {path: 'admin/books/:title', component: BookComponent},
+  {path: 'welcome/books/:title', component: BookCustomerComponent},
 
 
   {path: '**', component: ErrorComponent}
