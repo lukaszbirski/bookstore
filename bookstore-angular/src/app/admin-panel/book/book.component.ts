@@ -19,6 +19,17 @@ export class BookComponent implements OnInit {
   public book: Book;
   public title: string;
   public author: string;
+  public titleError: string;
+  public authorError: string;
+  public categoryError: string;
+  public pagesError: string;
+  public eanError: string;
+  public priceError: string;
+  public descriptionError: string;
+  public publisherError: string;
+  public fileUploadError: string;
+  public releaseDateError: string;
+  public coverTypeError: string;
 
   constructor(
     private coverTypeService: CoverTypeDataService,
@@ -63,17 +74,43 @@ export class BookComponent implements OnInit {
       this.booksDataService.createBook(this.book).subscribe(
         data => {
           this.router.navigate(['admin/books']);
-        }
+        }, (error => {
+          this.setValidations(error);
+        })
       );
-      console.log('save');
     } else {
       this.booksDataService.updateBook(this.title, this.book).subscribe(
         data => {
           this.router.navigate(['admin/books']);
-        }
+        }, (error => {
+          this.setValidations(error);
+        })
       );
-      console.log('update');
     }
-    console.log('finished');
+  }
+
+  setValidations(error) {
+    this.titleError = error.title;
+    this.authorError = error.author;
+    this.categoryError = error.category;
+    this.pagesError = error.pages;
+    this.eanError = error.ean;
+    this.priceError = error.price;
+    this.descriptionError = error.description;
+    this.publisherError = error.publisher;
+    this.fileUploadError = error.fileName;
+    this.releaseDateError = error.releaseDate;
+    this.coverTypeError = error.coverType;
+    if (error.title != null) {
+      this.titleError = error.title;
+      // tslint:disable-next-line:triple-equals
+    } else {
+      this.titleError = error.name;
+    }
+  }
+
+  onSelectFile(event) {
+    const file = event.target.files[0];
+    console.log(file);
   }
 }

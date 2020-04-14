@@ -12,6 +12,7 @@ export class CategoryComponent implements OnInit {
 
   categoryName: string;
   category: Category;
+  errorMassage: string;
 
   constructor(
     private categoryService: CategoriesDataService,
@@ -35,14 +36,28 @@ export class CategoryComponent implements OnInit {
       this.categoryService.createCategory(this.categoryName, this.category).subscribe(
         data => {
           this.router.navigate(['admin/categories']);
+        }, error => {
+          this.setValidation(error);
         }
       );
     } else {
       this.categoryService.updateCategory(this.categoryName, this.category).subscribe(
         data => {
           this.router.navigate(['admin/categories']);
+        }, error => {
+          this.setValidation(error);
         }
       );
+    }
+  }
+
+    setValidation(error) {
+    // tslint:disable-next-line:triple-equals
+    if (error.name != null) {
+      this.errorMassage = error.name;
+      // tslint:disable-next-line:triple-equals
+    } else {
+      this.errorMassage = error.categoryName;
     }
   }
 }

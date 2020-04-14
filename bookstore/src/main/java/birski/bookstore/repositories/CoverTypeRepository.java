@@ -12,4 +12,6 @@ public interface CoverTypeRepository extends JpaRepository<CoverType, Long> {
 
     CoverType findCoverTypeByName(String name);
 
+    int countByName(String name);
+
 }

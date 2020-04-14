@@ -29,6 +29,7 @@ export class Book {
 export class ListBooksComponent implements OnInit {
 
   public books: Book[];
+  public deleteError: string;
 
   constructor(
     private bookService: BooksDataService,
@@ -55,6 +56,9 @@ export class ListBooksComponent implements OnInit {
   deleteBook(bookTitle) {
     this.bookService.deleteBook(bookTitle).subscribe(
       response => {
+        this.refreshBooks();
+      }, error => {
+        this.deleteError = error.error.text;
         this.refreshBooks();
       }
     );

@@ -7,8 +7,9 @@ import java.util.List;
 
 public class CategoryDto {
 
-    @NotBlank(message = "Field is required")
+    @NotBlank(message = "Category type is required")
     private String categoryName;
+
     private List<String> books = new ArrayList<>();
 
     public String getCategoryName() {

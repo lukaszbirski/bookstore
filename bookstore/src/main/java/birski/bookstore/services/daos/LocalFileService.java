@@ -93,8 +93,6 @@ public class LocalFileService {
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType)).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + targetFile.getName()+"\"").contentLength(targetFile.length()).body(resource);
     }
 
-    //todo zrobić pobieranie pojedyńczego pliku
-
     public List<LocalFileManager> getFiles(){
         Stream<Path> files;
         try {

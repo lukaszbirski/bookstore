@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Book } from '../list-books/list-books.component';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +13,35 @@ export class BooksDataService {
     private http: HttpClient
   ) { }
 
-  retrieveAllBooks() {
+  retrieveAllBooks(): Observable<Book[]> {
     return this.http.get<Book[]>(`http://localhost:8080/api/dto/books`);
   }
 
-  retrieveBook(title) {
+  retrieveBook(title): Observable<Book> {
     return this.http.get<Book>(`http://localhost:8080/api/dto/books/${title}`);
   }
 
-  deleteBook(title) {
+  deleteBook(title): Observable<any> {
     return this.http.delete(`http://localhost:8080/api/dto/books/${title}`);
   }
 
-  createBook(book) {
-    return this.http.post(`http://localhost:8080/api/dto/books`, book);
+  createBook(book): Observable<any> {
+    return this.http.post(`http://localhost:8080/api/dto/books`, book).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  updateBook(title, book) {
-    return this.http.put(`http://localhost:8080/api/dto/books/${title}`, book);
+  updateBook(title, book): Observable<any> {
+    return this.http.put(`http://localhost:8080/api/dto/books/${title}`, book).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  retrieveBooksByCategory(category) {
+  retrieveBooksByCategory(category): Observable<Book[]> {
     return this.http.get<Book[]>(`http://localhost:8080/api/dto/books/category/${category}`);
+  }
+
+  handleError(error: HttpErrorResponse) {
+    return throwError(error.error);
   }
 }

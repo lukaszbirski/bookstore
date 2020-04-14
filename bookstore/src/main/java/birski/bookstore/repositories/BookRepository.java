@@ -16,6 +16,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Optional<Book> findByTitle(String title);
     Book getBookByTitle(String title);
+    int countByTitle(String title);
     //Optional<List<Book>> getAllByCategory(String category);
 
     @Transactional

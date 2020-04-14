@@ -41,7 +41,8 @@ export class BookDetailsComponent implements OnInit {
   deleteBook(bookTitle) {
     this.bookService.deleteBook(bookTitle).subscribe(
       response => {
-        this.retrieveBook(bookTitle);
+        this.router.navigate(['admin/books']);
+      }, error => {
         this.router.navigate(['admin/books']);
       }
     );

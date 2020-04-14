@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Category } from './list-categories.component';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +13,31 @@ export class CategoriesDataService {
     private http: HttpClient
   ) { }
 
-  retrieveAllCategories() {
+  retrieveAllCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`http://localhost:8080/api/dto/categories`);
   }
 
-  retrieveCategory(name) {
+  retrieveCategory(name): Observable<Category> {
     return this.http.get<Category>(`http://localhost:8080/api/dto/categories/${name}`);
   }
 
-  createCategory(name, category) {
-    return this.http.post(`http://localhost:8080/api/dto/categories/${name}`, category);
+  createCategory(name, category): Observable<any> {
+    return this.http.post(`http://localhost:8080/api/dto/categories/${name}`, category).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  updateCategory(name, category) {
-    return this.http.put(`http://localhost:8080/api/dto/categories/${name}`, category);
+  updateCategory(name, category): Observable<any> {
+    return this.http.put(`http://localhost:8080/api/dto/categories/${name}`, category).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  deleteCategory(name) {
+  deleteCategory(name): Observable<any> {
     return this.http.delete(`http://localhost:8080/api/dto/categories/${name}`);
+  }
+
+  handleError(error: HttpErrorResponse) {
+    return throwError(error.error);
   }
 }

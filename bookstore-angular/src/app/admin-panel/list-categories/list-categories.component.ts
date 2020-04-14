@@ -23,6 +23,7 @@ export class Book {
 export class ListCategoriesComponent implements OnInit {
 
   public categories: Category[];
+  public deleteError: string;
 
   constructor(
     private categoriesService: CategoriesDataService,
@@ -47,6 +48,9 @@ export class ListCategoriesComponent implements OnInit {
     this.categoriesService.deleteCategory(categoryName).subscribe(
       response => {
 
+        this.refreshCategories();
+      }, error => {
+        this.deleteError = error.error.text;
         this.refreshCategories();
       }
     );

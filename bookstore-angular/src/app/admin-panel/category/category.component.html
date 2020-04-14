@@ -4,6 +4,9 @@
         <fieldset class="form-group">
             <label>Name:</label>
             <input type="text" class="form-control" name="categoryName" required="required" [(ngModel)] = "category.categoryName">
+            <div class="alert alert-danger" role="alert" *ngIf="errorMassage">
+                {{errorMassage}}
+            </div>
         </fieldset>
         <button type="submit" class="btn btn-success">Save</button>
     </form>

@@ -3,16 +3,20 @@ package birski.bookstore.services.dtos;
 import birski.bookstore.exceptions.NameException;
 import birski.bookstore.exceptions.ResourceNotFoundException;
 import birski.bookstore.mappers.CategoryMapper;
+import birski.bookstore.models.daos.Category;
 import birski.bookstore.models.dtos.CategoryDto;
 import birski.bookstore.repositories.CategoryRepository;
 import birski.bookstore.services.validation.MapValidationErrorService;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import javax.validation.ConstraintViolation;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -39,7 +43,7 @@ public class CategoryDtoService {
         return categoryRepository.getCategoryByCategoryName(categoryName).map(c -> {
             CategoryDto categoryDto = categoryMapper.map(c);
             return categoryDto;
-        }).orElseThrow(() -> new ResourceNotFoundException("Category name: " + categoryName + " not found."));
+        }).orElseThrow(() -> new ResourceNotFoundException("Category " + categoryName + " has not been found."));
     }
 
     public ResponseEntity<?> createCategoryDto(CategoryDto categoryDto, BindingResult bindingResult){
@@ -50,24 +54,30 @@ public class CategoryDtoService {
             categoryRepository.save(categoryMapper.reverse(categoryDto));
             return new ResponseEntity<CategoryDto>(categoryDto, HttpStatus.CREATED);
         }catch (Exception e){
-            throw new NameException("Category name " + categoryDto.getCategoryName() + " already exists");
+            throw new NameException("Category " + categoryDto.getCategoryName() + " already exists");
         }
     }
 
     public ResponseEntity<?> updateCategoryDto(String categoryName, CategoryDto categoryDto, BindingResult bindingResult){
+
         ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
         if (errors != null) return errors;
-        return categoryRepository.getCategoryByCategoryName(categoryName).map(c -> {
-            c.setCategoryName(categoryDto.getCategoryName());
-            categoryMapper.map(categoryRepository.save(c));
+
+        if (categoryRepository.countByCategoryName(categoryDto.getCategoryName()) == 0){
+            Category category = categoryRepository.findCategoryByCategoryName(categoryName);
+            category.setCategoryName(categoryDto.getCategoryName());
+            categoryRepository.save(category);
             return new ResponseEntity<CategoryDto>(categoryDto, HttpStatus.OK);
-        }).orElseThrow(() -> new ResourceNotFoundException("Category name: " + categoryName + " not found."));
+        } else {
+            throw new NameException("Category " + categoryDto.getCategoryName() + " already exists");
+        }
+
     }
 
     public ResponseEntity<?> deleteCategoryDto(String categoryName){
         return categoryRepository.getCategoryByCategoryName(categoryName).map(c ->{
             categoryRepository.delete(c);
-            return new ResponseEntity<>("Category name: " + categoryName + " was deleted!", HttpStatus.OK);
-        }).orElseThrow(()-> new ResourceNotFoundException("Category name: " + categoryName + " not found."));
+            return new ResponseEntity<>("Category " + categoryName + " was deleted!", HttpStatus.OK);
+        }).orElseThrow(()-> new ResourceNotFoundException("Category " + categoryName + " has not been found."));
     }
 }

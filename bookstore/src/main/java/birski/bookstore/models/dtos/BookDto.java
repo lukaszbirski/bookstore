@@ -1,9 +1,8 @@
 package birski.bookstore.models.dtos;
 
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.*;
 import java.util.*;
 
 public class BookDto {
@@ -13,7 +12,8 @@ public class BookDto {
 
     @NotBlank(message = "Author is required")
     private String author;
-
+//todo testing
+    @NotNull(message = "Field is required")
     private List<String> categories = new ArrayList<>();
 
     @NotBlank(message = "Cover type is required")
@@ -25,23 +25,25 @@ public class BookDto {
     @NotBlank(message = "Description is required")
     private String description;
 
-    @Size(min = 12, max = 13, message = "Ean number should have between 12 and 13 digits")
     @NotBlank(message = "Ean number is required")
+    @Size(min = 12, max = 13, message = "Ean number should have between 12 and 13 digits")
     //@Pattern(regexp="\\d", message = "Ean number should have between 12 and 13 digits")
     private String ean;
 
-    //@NotBlank(message = "Number of pages is required")
+    @Min(value = 1, message = "Invalid value")
     private int pages;
 
-    //@NotBlank(message = "Price is required")
     @Digits(integer = 4, fraction = 2, message = "Invalid value")
+    @Min(value = 1, message = "Invalid value")
     private double price;
 
     @NotBlank(message = "Release date is required")
+    @Pattern(regexp = "20[0-9][0-9]-[0-1][0-9]-[0-3][0-9]", message = "Write date in yyyy-mm-dd format")
     private String releaseDate;
 
     private List<CommentDto> comments = new ArrayList<>();
 
+    @NotBlank(message = "File is required")
     private String fileName;
 
     public BookDto() {

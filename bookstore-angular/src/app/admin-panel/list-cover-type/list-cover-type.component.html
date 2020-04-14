@@ -1,6 +1,9 @@
 <h1>List of cover types</h1>
 
 <div class="container">
+    <div class="alert alert-success" role="alert" *ngIf="deleteError">
+      {{deleteError}}
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -8,7 +11,7 @@
                 <th>Update</th>
                 <th>Delete</th>
             </tr>
-        </thead>    
+        </thead>
         <tbody>
             <tr *ngFor="let coverType of coverTypes">
                 <td>{{coverType.name}}</td>

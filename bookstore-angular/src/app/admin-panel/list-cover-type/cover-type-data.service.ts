@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CoverType } from './list-cover-type.component';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,26 +11,34 @@ import { CoverType } from './list-cover-type.component';
 export class CoverTypeDataService {
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  retrieveAllCoverTypes(){
-    return this.http.get<CoverType[]>(`http://localhost:8080/api/dto/cover_type`)
+  retrieveAllCoverTypes(): Observable<CoverType[]> {
+    return this.http.get<CoverType[]>(`http://localhost:8080/api/dto/cover_type`);
   }
 
-  retrieveCoverType(name){
-    return this.http.get<CoverType>(`http://localhost:8080/api/dto/cover_type/${name}`)
+  retrieveCoverType(name): Observable<CoverType> {
+    return this.http.get<CoverType>(`http://localhost:8080/api/dto/cover_type/${name}`);
   }
 
-  createCoverType(name, coverType){
-    return this.http.post(`http://localhost:8080/api/dto/cover_type/${name}`, coverType)
+  createCoverType(name, coverType): Observable<any>  {
+    return this.http.post(`http://localhost:8080/api/dto/cover_type/${name}`, coverType).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  updateCoverType(name, coverType){
-    return this.http.put(`http://localhost:8080/api/dto/cover_type/${name}`, coverType)
+  updateCoverType(name, coverType): Observable<any> {
+    return this.http.put(`http://localhost:8080/api/dto/cover_type/${name}`, coverType).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  deleteCoverType(name){
+  deleteCoverType(name): Observable<any> {
     return this.http.delete(`http://localhost:8080/api/dto/cover_type/${name}`);
+  }
+
+  handleError(error: HttpErrorResponse) {
+    return throwError(error.error.name);
   }
 }

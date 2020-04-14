@@ -65,28 +65,30 @@ public class BookDtoService {
             Book result = bookRepository.save(book);
             return new ResponseEntity<BookDto>(bookMapper.map(result), HttpStatus.CREATED);
         }catch (Exception e){
-            throw new NameException("Book name " + bookDto.getTitle() + " already exists");
+            throw new NameException("Book " + bookDto.getTitle() + " already exists");
         }
     }
 
     public ResponseEntity<?> updateBookDto(String bookTitle, BookDto bookDto, BindingResult bindingResult){
+
         ResponseEntity<?> error = mapValidationErrorService.MapValidationService(bindingResult);
         if (error != null) return error;
-        return bookRepository.findByTitle(bookTitle).map(b -> {
+
+        if (bookRepository.countByTitle(bookDto.getTitle()) == 0){
             Book book = bookMapper.reverse(bookDto);
-            book.setId(b.getId());
-            logger.info("---BOOK: " + book.toString() + "---");
+            book.setId(bookRepository.getBookByTitle(bookTitle).getId());
             bookRepository.save(book);
-            BookDto response = bookMapper.map(bookRepository.save(book));
-            return new ResponseEntity<BookDto>(response, HttpStatus.CREATED);
-        }).orElseThrow(() -> new ResourceNotFoundException("Book titled: " + bookTitle + "not found."));
+            return new ResponseEntity<BookDto>(bookDto, HttpStatus.OK);
+        }else {
+            throw new NameException("Book " + bookDto.getTitle() + " already exists");
+        }
     }
 
     public ResponseEntity<?> deleteBookDto(String bookTitle){
         return bookRepository.findByTitle(bookTitle).map(b ->{
             bookRepository.delete(b);
-            return new ResponseEntity<>("Book with title: " + bookTitle + " was deleted!", HttpStatus.OK);
-        }).orElseThrow(()-> new ResourceNotFoundException("Book with title: " + bookTitle + " has not been found."));
+            return new ResponseEntity<>("Book " + bookTitle + " was deleted!", HttpStatus.OK);
+        }).orElseThrow(()-> new ResourceNotFoundException("Book " + bookTitle + " has not been found."));
     }
 
     public List<BookDto> getBooksDtoByCategory(String category){
