@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CoverTypeDataService } from '../list-cover-type/cover-type-data.service';
 import { CoverType } from '../list-cover-type/list-cover-type.component';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Category} from '../list-categories/list-categories.component';
-import {CategoriesDataService} from '../list-categories/categories-data.service';
-import {Book} from '../list-books/list-books.component';
-import {BooksDataService} from '../list-books/books-data.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Category } from '../list-categories/list-categories.component';
+import { CategoriesDataService } from '../list-categories/categories-data.service';
+import { Book } from '../list-books/list-books.component';
+import { BooksDataService } from '../list-books/books-data.service';
+import { FileService } from '../../services/file.service';
 
 @Component({
   selector: 'app-book',
@@ -17,6 +18,7 @@ export class BookComponent implements OnInit {
   public coverTypes: CoverType[];
   public categories: Category[];
   public book: Book;
+  public userFile: any = File;
   public title: string;
   public author: string;
   public titleError: string;
@@ -35,6 +37,7 @@ export class BookComponent implements OnInit {
     private coverTypeService: CoverTypeDataService,
     private categoriesDataService: CategoriesDataService,
     private booksDataService: BooksDataService,
+    private fileService: FileService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -69,10 +72,16 @@ export class BookComponent implements OnInit {
   }
 
   saveBook() {
-    console.log(this.title);
     if (this.title === '') {
+
+      const formData = new FormData();
+      formData.append('file', this.userFile);
+
       this.booksDataService.createBook(this.book).subscribe(
         data => {
+          this.fileService.uploadFile(formData).subscribe(response => {
+
+          });
           this.router.navigate(['admin/books']);
         }, (error => {
           this.setValidations(error);
@@ -112,5 +121,8 @@ export class BookComponent implements OnInit {
   onSelectFile(event) {
     const file = event.target.files[0];
     console.log(file);
+    this.book.fileName = file.name;
+    this.userFile = file;
+    console.log(this.book);
   }
 }
