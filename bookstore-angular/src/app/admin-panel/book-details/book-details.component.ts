@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BooksDataService } from '../list-books/books-data.service';
 import { Book } from '../list-books/list-books.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommentDataService } from '../list-comments/comment-data.service';
-import { Comment } from '../list-comments/list-comments.component';
-import {Category} from '../list-categories/list-categories.component';
+import { Category } from '../list-categories/list-categories.component';
+import { FileService } from '../../services/file.service';
 
 @Component({
   selector: 'app-book-details',
@@ -19,6 +18,7 @@ export class BookDetailsComponent implements OnInit {
 
   constructor(
     private bookService: BooksDataService,
+    private fileService: FileService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -41,8 +41,11 @@ export class BookDetailsComponent implements OnInit {
   deleteBook(bookTitle) {
     this.bookService.deleteBook(bookTitle).subscribe(
       response => {
-        this.router.navigate(['admin/books']);
       }, error => {
+        this.fileService.deleteFile(this.book.fileName).subscribe(
+          next => {
+          }
+        );
         this.router.navigate(['admin/books']);
       }
     );

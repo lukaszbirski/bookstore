@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BooksDataService } from './books-data.service';
 import { Router } from '@angular/router';
 import {Comment} from '../list-comments/list-comments.component';
+import {FileService} from '../../services/file.service';
 
 export class Book {
   constructor(
@@ -29,10 +30,12 @@ export class Book {
 export class ListBooksComponent implements OnInit {
 
   public books: Book[];
+  public book: Book;
   public deleteError: string;
 
   constructor(
     private bookService: BooksDataService,
+    private fileService: FileService,
     private router: Router
   ) { }
 
@@ -54,12 +57,17 @@ export class ListBooksComponent implements OnInit {
   }
 
   deleteBook(bookTitle) {
+    this.bookService.retrieveBook(bookTitle).subscribe(result => {
+      this.book = result;
+    });
     this.bookService.deleteBook(bookTitle).subscribe(
       response => {
         this.refreshBooks();
       }, error => {
         this.deleteError = error.error.text;
+        console.log(this.book.fileName);
         this.refreshBooks();
+        this.fileService.deleteFile(this.book.fileName).subscribe();
       }
     );
   }

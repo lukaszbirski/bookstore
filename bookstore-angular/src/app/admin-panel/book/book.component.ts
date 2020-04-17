@@ -79,9 +79,7 @@ export class BookComponent implements OnInit {
 
       this.booksDataService.createBook(this.book).subscribe(
         data => {
-          this.fileService.uploadFile(formData).subscribe(response => {
-
-          });
+          this.fileService.uploadFile(formData).subscribe(response => {});
           this.router.navigate(['admin/books']);
         }, (error => {
           this.setValidations(error);
@@ -102,6 +100,7 @@ export class BookComponent implements OnInit {
     this.titleError = error.title;
     this.authorError = error.author;
     this.categoryError = error.category;
+    console.log(error);
     this.pagesError = error.pages;
     this.eanError = error.ean;
     this.priceError = error.price;
@@ -120,9 +119,7 @@ export class BookComponent implements OnInit {
 
   onSelectFile(event) {
     const file = event.target.files[0];
-    console.log(file);
     this.book.fileName = file.name;
     this.userFile = file;
-    console.log(this.book);
   }
 }

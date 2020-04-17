@@ -1,7 +1,9 @@
 package birski.bookstore.models.dtos;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.*;
 
@@ -12,8 +14,9 @@ public class BookDto {
 
     @NotBlank(message = "Author is required")
     private String author;
-//todo testing
+//todo dokończyć walidację
     @NotNull(message = "Field is required")
+    @NotEmpty(message = "Field is required")
     private List<String> categories = new ArrayList<>();
 
     @NotBlank(message = "Cover type is required")

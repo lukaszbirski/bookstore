@@ -14,4 +14,8 @@ export class FileService {
   uploadFile(formData): Observable<any> {
     return this.http.post(`http://localhost:8080/api/v1/files`, formData);
   }
+
+  deleteFile(fileName): Observable<any> {
+    return this.http.delete(`http://localhost:8080/api/v1/files/delete/${fileName}`);
+  }
 }
