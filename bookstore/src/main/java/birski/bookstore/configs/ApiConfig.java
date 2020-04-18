@@ -14,6 +14,7 @@ public class ApiConfig {
     public static final String ID_URL = "/{id}";
     public static final String FILE_NAME_PATH_VARIABLE_URL = "/{filename}";
     public static final String NAME_URL = "/{name}";
+    public static final String USERS_URL = "/users";
 
     public static final String UPLOADS_DIRECTORY = "/Dropbox/PW/J10/BOOKSTORE - SPRING + REACT/bookstore-angular/src/assets/books/";
     public static final String DOWNLOAD_URI = "/api/v1/files/download/";

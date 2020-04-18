@@ -14,9 +14,7 @@ public class BookDto {
 
     @NotBlank(message = "Author is required")
     private String author;
-//todo dokończyć walidację
-    @NotNull(message = "Field is required")
-    @NotEmpty(message = "Field is required")
+
     private List<String> categories = new ArrayList<>();
 
     @NotBlank(message = "Cover type is required")
@@ -30,7 +28,6 @@ public class BookDto {
 
     @NotBlank(message = "Ean number is required")
     @Size(min = 12, max = 13, message = "Ean number should have between 12 and 13 digits")
-    //@Pattern(regexp="\\d", message = "Ean number should have between 12 and 13 digits")
     private String ean;
 
     @Min(value = 1, message = "Invalid value")
