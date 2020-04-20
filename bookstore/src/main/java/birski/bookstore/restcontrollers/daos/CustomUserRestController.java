@@ -16,11 +16,11 @@ import static birski.bookstore.configs.ApiConfig.USERS_URL;
 
 @RestController
 @RequestMapping(API_URL + USERS_URL)
-public class CustomUserController {
+public class CustomUserRestController {
 
     private CustomUserService customUserService;
 
-    public CustomUserController(CustomUserService customUserService) {
+    public CustomUserRestController(CustomUserService customUserService) {
         this.customUserService = customUserService;
     }
 

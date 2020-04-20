@@ -28,18 +28,18 @@ public class CustomUserService {
 
     public ResponseEntity<?> saveCustomUser (CustomUser customUser, BindingResult bindingResult) {
 
-        try{
+//        try{
             userValidator.validate(customUser, bindingResult);
             if (customUser.getPassword() != null)  customUser.setPassword(bCryptPasswordEncoder.encode(customUser.getPassword()));
             ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
             if (errors != null) return errors;
-            
+
             customUser.setConfirmPassword("");
             CustomUser result = customUserRepository.save(customUser);
             return new ResponseEntity<CustomUser>(result, HttpStatus.CREATED);
-        }catch (Exception e){
-            throw  new UsernameAlreadyExistsException("Email " + customUser.getUsername() + " already exists in database");
-        }
+//        }catch (Exception e){
+//            throw  new UsernameAlreadyExistsException("Email " + customUser.getUsername() + " already exists in database");
+//        }
 
     }
 

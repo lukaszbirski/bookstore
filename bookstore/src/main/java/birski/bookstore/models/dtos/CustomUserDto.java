@@ -1,32 +1,23 @@
-package birski.bookstore.models.daos;
+package birski.bookstore.models.dtos;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
+import javax.persistence.PrePersist;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Date;
 
-@Entity
-@Table(name = "users")
-public class CustomUser implements UserDetails {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CustomUserDto implements UserDetails {
 
     @Email(message = "Please provide e-mail address")
     @NotBlank(message = "Username is required")
-    @Column(unique = true)
     private String username;
 
-    @NotBlank(message = "Password filed is required")
+    @NotBlank(message = "Please enter your password")
     private String password;
-
-    @Transient
-    private String confirmPassword;
 
     @NotBlank(message = "Please enter your first name")
     private String firstName;
@@ -39,22 +30,18 @@ public class CustomUser implements UserDetails {
 
     private Date create_At;
 
+    @Transient
+    private String confirmPassword;
+
     @PrePersist
     protected void onCreate() {
         this.create_At = new Date();
     }
 
-    public CustomUser() {
+    public CustomUserDto() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    @Override
     public String getUsername() {
         return username;
     }
@@ -63,20 +50,13 @@ public class CustomUser implements UserDetails {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public String getFirstName() {
@@ -109,6 +89,14 @@ public class CustomUser implements UserDetails {
 
     public void setCreate_At(Date create_At) {
         this.create_At = create_At;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     /**
