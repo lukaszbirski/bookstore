@@ -8,9 +8,7 @@ import birski.bookstore.repositories.CustomUserRepository;
 import birski.bookstore.security.JwtTokenProvider;
 import birski.bookstore.security.payload.JWTLoginSuccessResponse;
 import birski.bookstore.security.payload.LoginRequest;
-import birski.bookstore.services.validation.CustomUserDtoValidator;
 import birski.bookstore.services.validation.MapValidationErrorService;
-import birski.bookstore.services.validation.UserValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +19,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static birski.bookstore.configs.SecurityConstants.TOKEN_PREFIX;
 
 @Service
@@ -30,36 +31,37 @@ public class CustomUserDtoService {
     private CustomUserMapper customUserMapper;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private MapValidationErrorService mapValidationErrorService;
-    private CustomUserDtoValidator customUserDtoValidator;
 
     private JwtTokenProvider jwtTokenProvider;
     private AuthenticationManager authenticationManager;
 
-    public CustomUserDtoService(CustomUserRepository customUserRepository, CustomUserMapper customUserMapper, BCryptPasswordEncoder bCryptPasswordEncoder, MapValidationErrorService mapValidationErrorService, CustomUserDtoValidator customUserDtoValidator, JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
+    public CustomUserDtoService(CustomUserRepository customUserRepository, CustomUserMapper customUserMapper, BCryptPasswordEncoder bCryptPasswordEncoder, MapValidationErrorService mapValidationErrorService, JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
         this.customUserRepository = customUserRepository;
         this.customUserMapper = customUserMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.mapValidationErrorService = mapValidationErrorService;
-        this.customUserDtoValidator = customUserDtoValidator;
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationManager = authenticationManager;
     }
 
 
     public ResponseEntity<?> saveCustomUserDto(CustomUserDto customUserDto, BindingResult bindingResult) {
-
         try{
-            customUserDtoValidator.validate(customUserDto, bindingResult);
-            if (customUserDto.getPassword() != null)  customUserDto.setPassword(bCryptPasswordEncoder.encode(customUserDto.getPassword()));
             ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
             if (errors != null) return errors;
+            if (!customUserDto.getPassword().equals(customUserDto.getConfirmPassword())) {
 
+                Map<String, String> error = new HashMap<>();
+                error.put("password", "Passwords do not match");
+                return new ResponseEntity<Map<String, String>>(error, HttpStatus.BAD_REQUEST);
+            }
+
+            if (customUserDto.getPassword() != null)  customUserDto.setPassword(bCryptPasswordEncoder.encode(customUserDto.getPassword()));
             customUserDto.setConfirmPassword("");
-
             CustomUser result = customUserRepository.save(customUserMapper.reverse(customUserDto));
             return new ResponseEntity<CustomUserDto>(customUserMapper.map(result), HttpStatus.CREATED);
         }catch (Exception e){
-            throw  new UsernameAlreadyExistsException("Email " + customUserDto.getUsername() + " already exists in database");
+            throw new UsernameAlreadyExistsException("Email " + customUserDto.getUsername() + " already exists in database");
         }
 
     }

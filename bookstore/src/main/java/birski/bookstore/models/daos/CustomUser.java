@@ -17,25 +17,23 @@ public class CustomUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Email(message = "Please provide e-mail address")
-    @NotBlank(message = "Username is required")
     @Column(unique = true)
     private String username;
 
-    @NotBlank(message = "Password filed is required")
     private String password;
 
     @Transient
     private String confirmPassword;
 
-    @NotBlank(message = "Please enter your first name")
     private String firstName;
 
-    @NotBlank(message = "Please enter your last name")
     private String lastName;
 
-    @NotBlank(message = "Please enter your current address")
     private String address;
+
+    private String zip_code;
+
+    private String city;
 
     private Date create_At;
 
@@ -101,6 +99,22 @@ public class CustomUser implements UserDetails {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getZip_code() {
+        return zip_code;
+    }
+
+    public void setZip_code(String zip_code) {
+        this.zip_code = zip_code;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public Date getCreate_At() {

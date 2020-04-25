@@ -13,22 +13,27 @@ import { CoverTypeComponent} from './admin-panel/cover-type/cover-type.component
 import { BookDetailsComponent} from './admin-panel/book-details/book-details.component';
 import { BookComponent } from './admin-panel/book/book.component';
 import {BookCustomerComponent} from './welcome/book-customer/book-customer.component';
+import {LogoutComponent} from './logout/logout.component';
+import {RouteGuardService} from './services/route-guard.service';
+import {RegisterComponent} from './register/register.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'welcome', component: WelcomeComponent},
-  {path: 'welcome/:category', component: WelcomeComponent},
-  {path: 'admin', component: AdminPanelComponent},
-  {path: 'admin/categories', component: ListCategoriesComponent},
-  {path: 'admin/categories/:categoryName', component: CategoryComponent},
-  {path: 'admin/covertypes', component: ListCoverTypeComponent},
-  {path: 'admin/covertypes/:name', component: CoverTypeComponent},
-  {path: 'admin/books', component: ListBooksComponent},
-  {path: 'admin/comments', component: ListCommentsComponent},
-  {path: 'admin/books/details/:title', component: BookDetailsComponent},
-  {path: 'admin/books/:title', component: BookComponent},
-  {path: 'welcome/books/:title', component: BookCustomerComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'logout', component: LogoutComponent},
+  {path: 'welcome', component: WelcomeComponent, canActivate: [RouteGuardService]},
+  {path: 'welcome/:category', component: WelcomeComponent, canActivate: [RouteGuardService]},
+  {path: 'admin', component: AdminPanelComponent, canActivate: [RouteGuardService]},
+  {path: 'admin/categories', component: ListCategoriesComponent, canActivate: [RouteGuardService]},
+  {path: 'admin/categories/:categoryName', component: CategoryComponent, canActivate: [RouteGuardService]},
+  {path: 'admin/covertypes', component: ListCoverTypeComponent, canActivate: [RouteGuardService]},
+  {path: 'admin/covertypes/:name', component: CoverTypeComponent, canActivate: [RouteGuardService]},
+  {path: 'admin/books', component: ListBooksComponent, canActivate: [RouteGuardService]},
+  {path: 'admin/comments', component: ListCommentsComponent, canActivate: [RouteGuardService]},
+  {path: 'admin/books/details/:title', component: BookDetailsComponent, canActivate: [RouteGuardService]},
+  {path: 'admin/books/:title', component: BookComponent, canActivate: [RouteGuardService]},
+  {path: 'welcome/books/:title', component: BookCustomerComponent, canActivate: [RouteGuardService]},
 
 
   {path: '**', component: ErrorComponent}

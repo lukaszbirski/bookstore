@@ -21,6 +21,9 @@ public class CustomUserMapper implements Mapper<CustomUser, CustomUserDto>{
         customUserDto.setLastName(from.getLastName());
         customUserDto.setCreate_At(from.getCreate_At());
         customUserDto.setAddress(from.getAddress());
+        customUserDto.setZipCode(from.getZip_code());
+        customUserDto.setCity(from.getCity());
+
         return customUserDto;
     }
 
@@ -35,6 +38,8 @@ public class CustomUserMapper implements Mapper<CustomUser, CustomUserDto>{
         customUser.setLastName(to.getLastName());
         customUser.setCreate_At(to.getCreate_At());
         customUser.setAddress(to.getAddress());
+        customUser.setCity(to.getCity());
+        customUser.setZip_code(to.getZipCode());
 
         return customUser;
     }

@@ -7,6 +7,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ public class CustomUserDto implements UserDetails {
     private String username;
 
     @NotBlank(message = "Please enter your password")
+    @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
 
     @NotBlank(message = "Please enter your first name")
@@ -27,6 +30,14 @@ public class CustomUserDto implements UserDetails {
 
     @NotBlank(message = "Please enter your current address")
     private String address;
+
+    @NotBlank(message = "Please enter city")
+    private String city;
+
+    @Size(min = 6, max = 6, message = "Please provide correct zip code")
+    @NotBlank(message = "Please enter zip code")
+    @Pattern(regexp = "[0-9][0-9]-[0-9][0-9][0-9]", message = "Zip code should have xx-xxx format")
+    private String zipCode;
 
     private Date create_At;
 
@@ -97,6 +108,22 @@ public class CustomUserDto implements UserDetails {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     /**

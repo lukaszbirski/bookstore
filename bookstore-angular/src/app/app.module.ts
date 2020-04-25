@@ -21,6 +21,8 @@ import { CoverTypeComponent } from './admin-panel/cover-type/cover-type.componen
 import { BookDetailsComponent } from './admin-panel/book-details/book-details.component';
 import { BookComponent } from './admin-panel/book/book.component';
 import { BookCustomerComponent } from './welcome/book-customer/book-customer.component';
+import { LogoutComponent } from './logout/logout.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { BookCustomerComponent } from './welcome/book-customer/book-customer.com
     CoverTypeComponent,
     BookDetailsComponent,
     BookComponent,
-    BookCustomerComponent
+    BookCustomerComponent,
+    LogoutComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
