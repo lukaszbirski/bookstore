@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoriesDataService} from '../admin-panel/list-categories/categories-data.service';
+import {CategoriesDataService} from '../services/http/categories-data.service';
 import {Category} from '../admin-panel/list-categories/list-categories.component';
 import {HardcodedAuthenticationService} from '../services/hardcoded-authentication.service';
 

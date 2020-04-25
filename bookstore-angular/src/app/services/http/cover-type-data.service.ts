@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { CoverType } from './list-cover-type.component';
+import { CoverType } from '../../admin-panel/list-cover-type/list-cover-type.component';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 

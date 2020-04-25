@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CustomUserService} from './custom-user.service';
+import {CustomUserService} from './http/custom-user.service';
 import {LoginRequest} from '../login/login.component';
 
 @Injectable({

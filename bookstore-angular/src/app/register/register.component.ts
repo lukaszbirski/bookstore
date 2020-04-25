@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CustomUserService} from '../services/custom-user.service';
+import {CustomUserService} from '../services/http/custom-user.service';
 import {Router} from '@angular/router';
 
 export class User {

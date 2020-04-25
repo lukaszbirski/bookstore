@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CoverTypeDataService } from '../list-cover-type/cover-type-data.service';
+import { CoverTypeDataService } from '../../services/http/cover-type-data.service';
 import { CoverType } from '../list-cover-type/list-cover-type.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from '../list-categories/list-categories.component';
-import { CategoriesDataService } from '../list-categories/categories-data.service';
+import { CategoriesDataService } from '../../services/http/categories-data.service';
 import { Book } from '../list-books/list-books.component';
-import { BooksDataService } from '../list-books/books-data.service';
-import { FileService } from '../../services/file.service';
+import { BooksDataService } from '../../services/http/books-data.service';
+import { FileService } from '../../services/http/file.service';
 
 @Component({
   selector: 'app-book',

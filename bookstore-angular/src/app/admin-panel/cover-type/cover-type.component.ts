@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoverType } from '../list-cover-type/list-cover-type.component';
-import { CoverTypeDataService } from '../list-cover-type/cover-type-data.service';
+import { CoverTypeDataService } from '../../services/http/cover-type-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

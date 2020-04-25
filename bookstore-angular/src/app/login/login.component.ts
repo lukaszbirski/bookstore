@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {HardcodedAuthenticationService} from '../services/hardcoded-authentication.service';
-import {CustomUserService} from '../services/custom-user.service';
+import {CustomUserService} from '../services/http/custom-user.service';
 
 export class LoginRequest {
   constructor(
@@ -24,8 +24,6 @@ export class LoginComponent implements OnInit {
   ) { }
 
   loginRequest: LoginRequest;
-  username = 'login';
-  password = 'haslo';
   errorMessage = 'Invalid credentials';
   invalidLogin = false;
 

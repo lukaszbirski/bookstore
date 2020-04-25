@@ -23,7 +23,7 @@ import { BookComponent } from './admin-panel/book/book.component';
 import { BookCustomerComponent } from './welcome/book-customer/book-customer.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
-import {HttpIntercepterAuthService} from './services/http-intercepter-auth.service';
+import {HttpIntercepterAuthService} from './services/http/http-intercepter-auth.service';
 
 @NgModule({
   declarations: [

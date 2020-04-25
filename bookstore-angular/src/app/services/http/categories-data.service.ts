@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Category } from './list-categories.component';
+import { Category } from '../../admin-panel/list-categories/list-categories.component';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 

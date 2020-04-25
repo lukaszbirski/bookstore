@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {BooksDataService} from '../admin-panel/list-books/books-data.service';
+import {BooksDataService} from '../services/http/books-data.service';
 import {Book} from '../admin-panel/list-books/list-books.component';
 import {Category} from '../admin-panel/list-categories/list-categories.component';
 

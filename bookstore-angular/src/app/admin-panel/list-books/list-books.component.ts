@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BooksDataService } from './books-data.service';
+import { BooksDataService } from '../../services/http/books-data.service';
 import { Router } from '@angular/router';
 import {Comment} from '../list-comments/list-comments.component';
-import {FileService} from '../../services/file.service';
+import {FileService} from '../../services/http/file.service';
 
 export class Book {
   constructor(
