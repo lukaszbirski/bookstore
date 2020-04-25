@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {CustomUserService} from './custom-user.service';
+import {LoginRequest} from '../login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +9,8 @@ export class HardcodedAuthenticationService {
 
   constructor() { }
 
-  authenticate(username, password) {
-    if (username === 'login' && password === 'haslo') {
-      sessionStorage.setItem('authenticatedUser', username);
-      return true;
-    } else {
-      return false;
-    }
+  authenticate(loginRequest) {
+      sessionStorage.setItem('authenticatedUser', loginRequest.username);
   }
 
   isUserLoggedIn() {
@@ -23,5 +20,6 @@ export class HardcodedAuthenticationService {
 
   logout() {
     sessionStorage.removeItem('authenticatedUser');
+    sessionStorage.removeItem('token');
   }
 }

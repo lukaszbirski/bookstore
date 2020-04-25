@@ -13,7 +13,13 @@ export class CustomUserService {
   ) { }
 
   createUser(user): Observable<any> {
-    return this.http.post(`http://localhost:8070/api/dto/users/register`, user).pipe(
+    return this.http.post(`http://localhost:8080/api/dto/users/register`, user).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAuthentication(loginRequest): Observable<any> {
+    return  this.http.post(`http://localhost:8080/api/dto/users/login`, loginRequest).pipe(
       catchError(this.handleError)
     );
   }

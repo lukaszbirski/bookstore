@@ -12,7 +12,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { ListCategoriesComponent } from './admin-panel/list-categories/list-categories.component';
-import { HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { CategoryComponent } from './admin-panel/category/category.component';
 import { ListCoverTypeComponent } from './admin-panel/list-cover-type/list-cover-type.component';
 import { ListCommentsComponent } from './admin-panel/list-comments/list-comments.component';
@@ -23,6 +23,7 @@ import { BookComponent } from './admin-panel/book/book.component';
 import { BookCustomerComponent } from './welcome/book-customer/book-customer.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RegisterComponent } from './register/register.component';
+import {HttpIntercepterAuthService} from './services/http-intercepter-auth.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterAuthService, multi: true}
   ],
   bootstrap: [AppComponent]
 })
