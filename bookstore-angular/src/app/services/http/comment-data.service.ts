@@ -11,27 +11,27 @@ export class CommentDataService {
     private http: HttpClient
   ) { }
 
-  retrieveAllComments(){
-    return this.http.get<Comment[]>(`http://localhost:8080/api/dto/comments`)
+  retrieveAllComments() {
+    return this.http.get<Comment[]>(`http://localhost:8080/api/dto/comments`);
   }
 
-  retrieveCommentForBook(bookTitle){
-    return this.http.get<Comment[]>(`http://localhost:8080/api/dto/comments/${bookTitle}`)
+  retrieveCommentForBook(bookTitle) {
+    return this.http.get<Comment[]>(`http://localhost:8080/api/dto/comments/${bookTitle}`);
   }
 
-  retrieveComment(bookTitle, author){
-    return this.http.get<Comment>(`http://localhost:8080/api/dto/comments/${author}&${bookTitle}`)
+  retrieveComment(bookTitle, author) {
+    return this.http.get<Comment>(`http://localhost:8080/api/dto/comments/${author}&${bookTitle}`);
   }
 
-  createComment(bookTitle, author, comment){
-    return this.http.post(`http://localhost:8080/api/dto/comments/${author}&${bookTitle}`, comment)
+  createComment(bookTitle, author, comment) {
+    return this.http.post(`http://localhost:8080/api/dto/comments/${author}&${bookTitle}`, comment);
   }
 
-  updateComment(bookTitle, author, comment){
-    return this.http.put(`http://localhost:8080/api/dto/comments/${author}&${bookTitle}`, comment)
+  updateComment(bookTitle, author, comment) {
+    return this.http.put(`http://localhost:8080/api/dto/comments/${author}&${bookTitle}`, comment);
   }
 
-  deleteComment(bookTitle, author){
-    return this.http.delete(`http://localhost:8080/api/dto/comments/${author}&${bookTitle}`)
+  deleteComment(bookTitle, author) {
+    return this.http.delete(`http://localhost:8080/api/dto/comments/${author}&${bookTitle}`);
   }
 }

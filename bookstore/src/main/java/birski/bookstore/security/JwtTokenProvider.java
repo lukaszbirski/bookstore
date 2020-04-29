@@ -19,9 +19,7 @@ public class JwtTokenProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 
-    //Generate token
     public String generateToken(Authentication authentication){
-        //TODO prawdopodobnie będę zmieniał na CustomUser jeśli nie zadziała
         CustomUser customUser = (CustomUser) authentication.getPrincipal();
         Date now = new Date(System.currentTimeMillis());
         Date expiryDate = new Date(now.getTime() + EXPIRATION_TIME);
@@ -29,11 +27,10 @@ public class JwtTokenProvider {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", customUser.getId());
         claims.put("username", customUser.getUsername());
-        //w przyszłości tu będę dodawał role
+        claims.put("roles", customUser.getAuthorities());
         return Jwts.builder().setSubject(username).setClaims(claims).setIssuedAt(now).setExpiration(expiryDate).signWith(SignatureAlgorithm.HS512, SECRET).compact();
     }
 
-    //Validate the token
     public boolean validateToken(String token){
         try{
             Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
@@ -52,7 +49,6 @@ public class JwtTokenProvider {
         return false;
     }
 
-    //Get user Id from token
     public Long getIdFromJWT(String token){
         Claims claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
         logger.info(claims.get("id").toString());

@@ -31,7 +31,6 @@ public class CustomUserDtoRestController {
         return customUserDtoService.saveCustomUserDto(customUserDto, bindingResult);
     }
 
-    //todo jeśli nie zadziała to będzie trzeba stworzyć coś takiego ale w customUserRestController, bez Dto
     @PostMapping("/login")
     public ResponseEntity<?> authenticateCustomUserDto(@Valid @RequestBody LoginRequest loginRequest, BindingResult bindingResult){
         return customUserDtoService.getAuthentication(loginRequest, bindingResult);

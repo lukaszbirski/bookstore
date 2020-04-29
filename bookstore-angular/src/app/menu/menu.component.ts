@@ -11,23 +11,20 @@ import {HardcodedAuthenticationService} from '../services/hardcoded-authenticati
 export class MenuComponent implements OnInit {
 
   public categories: Category[];
-  // public isUserLoggedIn = false;
 
   constructor(
     private categoriesDataService: CategoriesDataService,
     public hardcodedAuthenticationService: HardcodedAuthenticationService
-  ) { }
+  ) {this.refreshCategories(); }
 
   ngOnInit(): void {
-    this.refreshCategories();
-    // this.isUserLoggedIn = this.hardcodedAuthenticationService.isUserLoggedIn();
   }
 
   refreshCategories() {
     this.categoriesDataService.retrieveAllCategories().subscribe(
       response => {
-        console.log(response);
         this.categories = response;
+        console.log(response);
       }
     );
   }

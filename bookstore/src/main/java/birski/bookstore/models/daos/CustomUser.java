@@ -1,16 +1,18 @@
 package birski.bookstore.models.daos;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "public")
 public class CustomUser implements UserDetails {
 
     @Id
@@ -36,6 +38,19 @@ public class CustomUser implements UserDetails {
     private String city;
 
     private Date create_At;
+
+    private int enabled = 1;
+
+    @ManyToMany(cascade = {
+//            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.DETACH
+    })
+    @JoinTable(name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {
@@ -125,13 +140,31 @@ public class CustomUser implements UserDetails {
         this.create_At = create_At;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+
     /**
      UserDetails interface methods
      */
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return getRoles()
+                .stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName())).collect(Collectors.toList());
     }
 
     @Override
@@ -152,5 +185,23 @@ public class CustomUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", zip_code='" + zip_code + '\'' +
+                ", city='" + city + '\'' +
+                ", create_At=" + create_At +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
+                '}';
     }
 }

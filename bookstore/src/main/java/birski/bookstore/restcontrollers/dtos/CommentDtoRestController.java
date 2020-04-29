@@ -3,6 +3,7 @@ package birski.bookstore.restcontrollers.dtos;
 import birski.bookstore.models.dtos.CommentDto;
 import birski.bookstore.services.dtos.CommentDtoService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,41 +24,26 @@ public class CommentDtoRestController {
     }
 
     @PostMapping("/{name}")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> createCommentDto(@PathVariable ("name") String bookTitle, @Valid @RequestBody CommentDto commentDto, BindingResult bindingResult){
         return commentDtoService.createCommentDto(commentDto, bindingResult, bookTitle);
     }
 
     @GetMapping()
+    @PreAuthorize("hasRole('USER')")
     public List<CommentDto> getCommentsDto(){
         return commentDtoService.getCommentsDto();
     }
 
     @GetMapping("/{name}")
+    @PreAuthorize("hasRole('USER')")
     public List<CommentDto> getCommentDto(@PathVariable ("name") String bookTitle){
         return commentDtoService.getCommentsByBookTitle(bookTitle);
     }
 
     @DeleteMapping("/{name}&{book}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteCommentDto(@PathVariable ("name") String author, @PathVariable ("book") String bookTitle){
         return commentDtoService.deleteCommentDto(author, bookTitle);
     }
-
-//    @PostMapping()
-//    public ResponseEntity<?> createCommentDto(@Valid @RequestBody CommentDto commentDto, BindingResult bindingResult){
-//        return commentDtoService.createCommentDto(commentDto, bindingResult);
-//    }
-//
-//    @PutMapping(NAME_URL)
-//    public ResponseEntity<?> updateCommentDto(@PathVariable ("title") String title, @Valid @RequestBody CommentDto commentDto, BindingResult bindingResult){
-//        return commentDtoService.updateCommentDto(title, commentDto, bindingResult); //todo zastanowić się czy na pewno po tytule chcemu móc update'ować komentarz
-//    }
-
 }
-
-
-
-//
-//    @DeleteMapping(NAME_URL)
-//    public ResponseEntity<?> deleteCategoryDto(@PathVariable ("name") String categoryName){
-//        return categoryDtoService.deleteCategoryDto(categoryName);
-//    }

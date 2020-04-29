@@ -1,13 +1,22 @@
 package birski.bookstore.mappers;
 
+import antlr.collections.List;
 import birski.bookstore.models.daos.CustomUser;
+import birski.bookstore.models.daos.Role;
 import birski.bookstore.models.dtos.CustomUserDto;
+import birski.bookstore.repositories.RoleRepository;
 import org.springframework.stereotype.Component;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 public class CustomUserMapper implements Mapper<CustomUser, CustomUserDto>{
 
-    public CustomUserMapper() {
+    private RoleRepository roleRepository;
+
+    public CustomUserMapper(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
     @Override
@@ -23,12 +32,22 @@ public class CustomUserMapper implements Mapper<CustomUser, CustomUserDto>{
         customUserDto.setAddress(from.getAddress());
         customUserDto.setZipCode(from.getZip_code());
         customUserDto.setCity(from.getCity());
+        Set<String> roles = new HashSet<>();
+        Set<Role> roleSet = roleRepository.getRolesByUsers(from);
+        for (Role role : roleSet) {
+            roles.add(role.getRoleName());
+        }
+        customUserDto.setRoles(roles);
 
         return customUserDto;
     }
 
     @Override
     public CustomUser reverse(CustomUserDto to) {
+
+        Set<Role> roles = new HashSet<>();
+        Role role = roleRepository.findByRoleName("USER");
+        roles.add(role);
 
         CustomUser customUser = new CustomUser();
         customUser.setUsername(to.getUsername());
@@ -40,6 +59,7 @@ public class CustomUserMapper implements Mapper<CustomUser, CustomUserDto>{
         customUser.setAddress(to.getAddress());
         customUser.setCity(to.getCity());
         customUser.setZip_code(to.getZipCode());
+        customUser.setRoles(roles);
 
         return customUser;
     }

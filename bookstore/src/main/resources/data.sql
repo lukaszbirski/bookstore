@@ -1,29 +1,17 @@
 --cover_type
-insert into covery_type("name")
-values ('twarda');
-insert into covery_type("name")
-values ('miękka');
+insert into covery_type("name") values ('twarda');
+insert into covery_type("name") values ('miękka');
 --categories
-insert into categories ("category_name")
-values ('kryminał i sensacja');
-insert into categories ("category_name")
-values ('thriller');
-insert into categories ("category_name")
-values ('polscy autorzy');
-insert into categories ("category_name")
-values ('proza');
-insert into categories ("category_name")
-values ('proza polska');
-insert into categories ("category_name")
-values ('powieść');
-insert into categories ("category_name")
-values ('fantastyka');
-insert into categories ("category_name")
-values ('fantazy');
-insert into categories ("category_name")
-values ('podróże');
-insert into categories ("category_name")
-values ('science fiction');
+insert into categories ("category_name") values ('kryminał i sensacja');
+insert into categories ("category_name") values ('thriller');
+insert into categories ("category_name") values ('polscy autorzy');
+insert into categories ("category_name") values ('proza');
+insert into categories ("category_name") values ('proza polska');
+insert into categories ("category_name") values ('powieść');
+insert into categories ("category_name") values ('fantastyka');
+insert into categories ("category_name") values ('fantazy');
+insert into categories ("category_name") values ('podróże');
+insert into categories ("category_name") values ('science fiction');
 --books
 insert into books("title", "author", "cover_type_id", "description", "ean", "pages", "price", "publisher", "release_date", "file_name")
 values ('Głosy z zaświatów', 'Remigiusz Mróz', 2, 'Nowa książka znanego autora', 9788380759893, 442, 23.14, 'Filia', '2020-01-29', 'Glosy_z_zaswiatow.png');
@@ -56,49 +44,38 @@ insert into comments("author", "date", "description", "rating", "book_id")
 values ('Tymoteusz Nowak', '2019-05-06', 'Zdecydowanie nie polecam.', 2, 2);
 insert into comments("author", "date", "description", "rating", "book_id")
 values ('Czytelnik', '2018-12-22', 'Nie jest najgorsza, ale czytałem lepsze.', 3.5, 3);
-
 --books_categories
-insert into books_categories("books_id", "categories_id")
-values (1, 1);
-insert into books_categories("books_id", "categories_id")
-values (1, 2);
-insert into books_categories("books_id", "categories_id")
-values (1, 3);
-insert into books_categories("books_id", "categories_id")
-values (2, 1);
-insert into books_categories("books_id", "categories_id")
-values (2, 2);
-insert into books_categories("books_id", "categories_id")
-values (3, 4);
-insert into books_categories("books_id", "categories_id")
-values (3, 5);
-insert into books_categories("books_id", "categories_id")
-values (3, 6);
-insert into books_categories("books_id", "categories_id")
-values (4, 7);
-insert into books_categories("books_id", "categories_id")
-values (4, 8);
-insert into books_categories("books_id", "categories_id")
-values (5, 9);
-insert into books_categories("books_id", "categories_id")
-values (6, 7);
-insert into books_categories("books_id", "categories_id")
-values (6, 8);
-insert into books_categories("books_id", "categories_id")
-values (7, 1);
-insert into books_categories("books_id", "categories_id")
-values (7, 2);
-insert into books_categories("books_id", "categories_id")
-values (7, 3);
-insert into books_categories("books_id", "categories_id")
-values (8, 1);
-insert into books_categories("books_id", "categories_id")
-values (8, 2);
-insert into books_categories("books_id", "categories_id")
-values (8, 3);
-insert into books_categories("books_id", "categories_id")
-values (9, 3);
-insert into books_categories("books_id", "categories_id")
-values (9, 6);
-insert into books_categories("books_id", "categories_id")
-values (9, 9);
+insert into books_categories("books_id", "categories_id") values (1, 1);
+insert into books_categories("books_id", "categories_id") values (1, 2);
+insert into books_categories("books_id", "categories_id") values (1, 3);
+insert into books_categories("books_id", "categories_id") values (2, 1);
+insert into books_categories("books_id", "categories_id") values (2, 2);
+insert into books_categories("books_id", "categories_id") values (3, 4);
+insert into books_categories("books_id", "categories_id") values (3, 5);
+insert into books_categories("books_id", "categories_id") values (3, 6);
+insert into books_categories("books_id", "categories_id") values (4, 7);
+insert into books_categories("books_id", "categories_id") values (4, 8);
+insert into books_categories("books_id", "categories_id") values (5, 9);
+insert into books_categories("books_id", "categories_id") values (6, 7);
+insert into books_categories("books_id", "categories_id") values (6, 8);
+insert into books_categories("books_id", "categories_id") values (7, 1);
+insert into books_categories("books_id", "categories_id") values (7, 2);
+insert into books_categories("books_id", "categories_id") values (7, 3);
+insert into books_categories("books_id", "categories_id") values (8, 1);
+insert into books_categories("books_id", "categories_id") values (8, 2);
+insert into books_categories("books_id", "categories_id") values (8, 3);
+insert into books_categories("books_id", "categories_id") values (9, 3);
+insert into books_categories("books_id", "categories_id") values (9, 6);
+insert into books_categories("books_id", "categories_id") values (9, 9);
+---roles-----
+insert into roles("role_name") values ('USER');
+insert into roles("role_name") values ('ADMIN');
+--users---
+insert into users ("address", "city", "create_at", "enabled", "first_name", "last_name", "password", "username", "zip_code")
+values ('Rudnickiego 10/65a', 'Warszawa', '2020-04-29', 1, 'Lukasz', 'Kwiatkowski', '$2a$10$heqBtvXcbQxmtz04szwD4ew2v3rfe1GfuU8x/.Ix3Akpiv66hg0ti', 'admin@gmail.com', '01-458');
+insert into users ("address", "city", "create_at", "enabled", "first_name", "last_name", "password", "username", "zip_code")
+values ('Rudnickiego 5', 'Warszawa', '2020-04-19', 1, 'Jacek', 'Nowak', '$2a$10$.lclwVMSMzBaKTXhTezNDeORK/B2igQmrp9O5dh5tATVHvQPV6g.W', 'user@gmail.com', '01-828');
+--add roles into users---
+insert into users_roles("user_id", "role_id") values (1, 1);
+insert into users_roles("user_id", "role_id") values (1, 2);
+insert into users_roles("user_id", "role_id") values (2, 1);

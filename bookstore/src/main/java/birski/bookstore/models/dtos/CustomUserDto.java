@@ -11,6 +11,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 public class CustomUserDto implements UserDetails {
 
@@ -40,6 +41,8 @@ public class CustomUserDto implements UserDetails {
     private String zipCode;
 
     private Date create_At;
+
+    private Set<String> roles;
 
     @Transient
     private String confirmPassword;
@@ -126,6 +129,14 @@ public class CustomUserDto implements UserDetails {
         this.zipCode = zipCode;
     }
 
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
+    }
+
     /**
      UserDetails interface methods
      */
@@ -154,4 +165,5 @@ public class CustomUserDto implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

@@ -62,12 +62,10 @@ public class CommentDtoService {
             for (Comment comment : b){
                 if (comment.getAuthor().equals(author)) {
                     commentRepository.delete(comment);
-
                     return new ResponseEntity<String>("Comment authored by: " + author + " for book: " + bookTitle + " was deleted!", HttpStatus.OK);
                 }
             }
             return new ResponseEntity<String>("There is no comment authored by: " + author + " regarding book: " + bookTitle, HttpStatus.OK);
         }).orElseThrow(() -> new ResourceNotFoundException("Book: " + bookTitle + "do not exist!"));
     }
-//todo stworzyć updatowanie komentarza
 }

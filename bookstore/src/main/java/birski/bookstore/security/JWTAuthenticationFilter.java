@@ -36,9 +36,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
             if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)){
                 Long userId = jwtTokenProvider.getIdFromJWT(jwt);
                 CustomUser customUser = customUserDetailsService.loadCustomUserById(userId);
-//todo tu gdzie jest empty list będzie podawana lista ról gdy będę robił admina
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                        customUser, null, Collections.emptyList());
+                        customUser, null, customUser.getAuthorities());
                 authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }

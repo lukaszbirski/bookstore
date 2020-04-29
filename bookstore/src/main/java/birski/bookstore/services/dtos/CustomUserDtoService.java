@@ -8,7 +8,10 @@ import birski.bookstore.repositories.CustomUserRepository;
 import birski.bookstore.security.JwtTokenProvider;
 import birski.bookstore.security.payload.JWTLoginSuccessResponse;
 import birski.bookstore.security.payload.LoginRequest;
+import birski.bookstore.services.daos.CustomUserService;
 import birski.bookstore.services.validation.MapValidationErrorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +29,8 @@ import static birski.bookstore.configs.SecurityConstants.TOKEN_PREFIX;
 
 @Service
 public class CustomUserDtoService {
+
+    private static final Logger logger = LoggerFactory.getLogger(CustomUserDtoService.class);
 
     private CustomUserRepository customUserRepository;
     private CustomUserMapper customUserMapper;
@@ -58,6 +63,8 @@ public class CustomUserDtoService {
 
             if (customUserDto.getPassword() != null)  customUserDto.setPassword(bCryptPasswordEncoder.encode(customUserDto.getPassword()));
             customUserDto.setConfirmPassword("");
+            logger.info("MY USER: " + customUserMapper.reverse(customUserDto).toString());
+
             CustomUser result = customUserRepository.save(customUserMapper.reverse(customUserDto));
             return new ResponseEntity<CustomUserDto>(customUserMapper.map(result), HttpStatus.CREATED);
         }catch (Exception e){
@@ -65,7 +72,7 @@ public class CustomUserDtoService {
         }
 
     }
-//todo ta część została stworzona dla CustomUserDto
+
     public ResponseEntity<?> getAuthentication(LoginRequest loginRequest, BindingResult bindingResult) {
         ResponseEntity<?> errors = mapValidationErrorService.MapValidationService(bindingResult);
         if (errors != null) return errors;

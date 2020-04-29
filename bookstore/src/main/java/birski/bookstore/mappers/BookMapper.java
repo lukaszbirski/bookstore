@@ -104,15 +104,15 @@ public class BookMapper implements Mapper<Book, BookDto>{
             categories.add(category);
         });
         book.setCategories(categories);
-        book.getCategories().stream().forEach(c -> {
-            //logger.info("Categories from book: " + c.toString());
-        });
+//        book.getCategories().stream().forEach(c -> {
+//            //logger.info("Categories from book: " + c.toString());
+//        });
         Set<Comment> comments = new HashSet<>();
         comments = commentRepository.findAllByBookTitle(to.getTitle());
         book.setComments(comments);
-        book.getComments().stream().forEach(c -> {
-            //logger.info("Comment: " + c.toString());
-        });
+//        book.getComments().stream().forEach(c -> {
+//            //logger.info("Comment: " + c.toString());
+//        });
 
         return book;
     }
