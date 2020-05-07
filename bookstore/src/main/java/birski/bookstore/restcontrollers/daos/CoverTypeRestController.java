@@ -24,7 +24,7 @@ public class CoverTypeRestController {
         return coverTypeService.createCoverType(coverType);
     }
 
-    @GetMapping(ID_URL)
+    @GetMapping("/{id}")
     public CoverType getCoverType(@PathVariable long id){
         return coverTypeService.getCoverTypeById(id);
     }
@@ -34,12 +34,12 @@ public class CoverTypeRestController {
         return coverTypeService.getCoverTypes();
     }
 
-    @PutMapping(ID_URL)
+    @PutMapping("/{id}")
     public CoverType updateCoverType(@PathVariable long id, @RequestBody CoverType coverType){
         return coverTypeService.updateCoverType(id, coverType);
     }
 
-    @DeleteMapping(ID_URL)
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCoverType(@PathVariable long id){
         return coverTypeService.deleteCoverType(id);
     }

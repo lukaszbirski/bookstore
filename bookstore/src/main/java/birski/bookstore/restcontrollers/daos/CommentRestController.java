@@ -9,7 +9,6 @@ import java.util.List;
 
 import static birski.bookstore.configs.ApiConfig.API_URL;
 import static birski.bookstore.configs.ApiConfig.COMMENTS_URL;
-import static birski.bookstore.configs.ApiConfig.ID_URL;
 
 @RestController
 @RequestMapping(API_URL + COMMENTS_URL)
@@ -26,7 +25,7 @@ public class CommentRestController {
         return commentService.createComment(comment);
     }
 
-    @GetMapping(ID_URL)
+    @GetMapping("/{id}")
     public Comment getComment(@PathVariable long id){
         return commentService.getCommentById(id);
     }
@@ -36,12 +35,12 @@ public class CommentRestController {
         return commentService.getComments();
     }
 
-    @PutMapping(ID_URL)
+    @PutMapping("/{id}")
     public Comment updateComment(@PathVariable long id, @RequestBody Comment comment){
         return commentService.updateComment(id, comment);
     }
 
-    @DeleteMapping(ID_URL)
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteComment(@PathVariable long id){
         return commentService.deleteComment(id);
     }

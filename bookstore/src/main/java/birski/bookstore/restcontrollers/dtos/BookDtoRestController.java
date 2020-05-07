@@ -14,7 +14,7 @@ import java.util.List;
 import static birski.bookstore.configs.ApiConfig.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = ANGULAR_API)
 @RequestMapping(API_URL + DTO_URL + BOOKS_URL)
 public class BookDtoRestController {
 
@@ -36,7 +36,7 @@ public class BookDtoRestController {
         return bookDtoService.getBooksDto();
     }
 
-    @GetMapping(NAME_URL)
+    @GetMapping("/{name}")
     @PreAuthorize("hasRole('USER')")
     public BookDto getBookDto(@PathVariable String name){
         return bookDtoService.getBookDto(name);
@@ -54,7 +54,7 @@ public class BookDtoRestController {
         return bookDtoService.updateBookDto(bookName, bookDto, bindingResult);
     }
 
-    @DeleteMapping(NAME_URL)
+    @DeleteMapping("/{name}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteBookDto(@PathVariable("name") String bookTitle){
         return bookDtoService.deleteBookDto(bookTitle);

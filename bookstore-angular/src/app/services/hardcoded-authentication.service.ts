@@ -13,13 +13,23 @@ export class HardcodedAuthenticationService {
       sessionStorage.setItem('authenticatedUser', loginRequest.username);
   }
 
+  authenticateAdmin() {
+    sessionStorage.setItem('role', 'ADMIN');
+  }
+
   isUserLoggedIn() {
     const user = sessionStorage.getItem('authenticatedUser');
+    return !(user === null);
+  }
+
+  isAdmin() {
+    const user = sessionStorage.getItem('role');
     return !(user === null);
   }
 
   logout() {
     sessionStorage.removeItem('authenticatedUser');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('role');
   }
 }

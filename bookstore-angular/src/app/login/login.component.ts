@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
     this.customUserService.getAuthentication(this.loginRequest).subscribe(
       data => {
         console.log(data);
+        this.checkIfAdmin(data);
         sessionStorage.setItem('token', data.token);
         this.hardcodedAuthenticationService.authenticate(this.loginRequest);
         this.invalidLogin = false;
@@ -46,5 +47,19 @@ export class LoginComponent implements OnInit {
       })
     );
   }
+
+  checkIfAdmin(data) {
+    const jwtData = data.token.split('.')[1];
+    const decodedJwtJsonData = window.atob(jwtData);
+    const decodedJwtData = JSON.parse(decodedJwtJsonData);
+    let step;
+    for (step = 0; step < decodedJwtData.roles.length; step++) {
+      const isAdmin = decodedJwtData.roles[step].authority;
+      if (isAdmin === 'ROLE_ADMIN') {
+        this.hardcodedAuthenticationService.authenticateAdmin();
+      }
+    }
+  }
+
 
 }

@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import static birski.bookstore.configs.ApiConfig.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = ANGULAR_API)
 @RequestMapping(API_URL + DTO_URL + USERS_URL)
 public class CustomUserDtoRestController {
 

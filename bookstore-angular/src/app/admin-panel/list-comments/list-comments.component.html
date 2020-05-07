@@ -1,6 +1,8 @@
 <h1>List of comments</h1>
 <div class="container">
-
+  <div class="alert alert-success" role="alert" *ngIf="deleteError">
+    {{deleteError}}
+  </div>
     <table class="table">
         <thead>
             <th>Book Title</th>
@@ -21,5 +23,5 @@
             </tr>
         </tbody>
     </table>
-    
+
 </div>

@@ -28,7 +28,7 @@ public class LocalFileRestController {
         return localFileService.getFiles();
     }
 
-    @GetMapping(FILE_URL + DOWNLOAD_URL + FILE_NAME_PATH_VARIABLE_URL)
+    @GetMapping(FILE_URL + DOWNLOAD_URL + "/{filename}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> downloadFile(@PathVariable String filename){
         return localFileService.getFile(filename);
@@ -40,7 +40,7 @@ public class LocalFileRestController {
         return localFileService.uploadFile(file);
     }
 
-    @DeleteMapping(FILE_URL + DELETE_URL + FILE_NAME_PATH_VARIABLE_URL)
+    @DeleteMapping(FILE_URL + DELETE_URL + "/{filename}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteFiles(@PathVariable String filename){
         return localFileService.deleteFile(filename);

@@ -18,6 +18,7 @@ export class MenuComponent implements OnInit {
   ) {this.refreshCategories(); }
 
   ngOnInit(): void {
+    this.refreshCategories();
   }
 
   refreshCategories() {

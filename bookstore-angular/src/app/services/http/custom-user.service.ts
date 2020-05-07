@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {API_URL} from '../../app.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,13 @@ export class CustomUserService {
   ) { }
 
   createUser(user): Observable<any> {
-    return this.http.post(`http://localhost:8080/api/dto/users/register`, user).pipe(
+    return this.http.post(`${API_URL}/users/register`, user).pipe(
       catchError(this.handleError)
     );
   }
 
   getAuthentication(loginRequest): Observable<any> {
-    return  this.http.post(`http://localhost:8080/api/dto/users/login`, loginRequest).pipe(
+    return  this.http.post(`${API_URL}/users/login`, loginRequest).pipe(
       catchError(this.handleError)
     );
   }

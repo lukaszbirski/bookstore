@@ -13,7 +13,7 @@ import java.util.List;
 import static birski.bookstore.configs.ApiConfig.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = ANGULAR_API)
 @RequestMapping(API_URL + DTO_URL + COVER_TYPE_URL)
 public class CoverTypeDtoRestController {
 
@@ -29,7 +29,7 @@ public class CoverTypeDtoRestController {
         return coverTypeDtoService.getCoverTypesDto();
     }
 
-    @GetMapping(NAME_URL)
+    @GetMapping("/{name}")
     @PreAuthorize("hasRole('USER')")
     public CoverTypeDto getCoverTypeDto(@PathVariable String name){
         return coverTypeDtoService.getCoverTypeDto(name);
@@ -41,13 +41,13 @@ public class CoverTypeDtoRestController {
         return coverTypeDtoService.createCoverTypeDto(coverTypeDto, bindingResult);
     }
 
-    @PutMapping(NAME_URL)
+    @PutMapping("/{name}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> updateCoverTypeDto(@PathVariable ("name") String name, @Valid @RequestBody CoverTypeDto coverTypeDto, BindingResult bindingResult){
         return coverTypeDtoService.updateCoverTypeDto(name, coverTypeDto, bindingResult);
     }
 
-    @DeleteMapping(NAME_URL)
+    @DeleteMapping("/{name}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> deleteCategoryDto(@PathVariable ("name") String name){
         return coverTypeDtoService.deleteCoverTypeDto(name);

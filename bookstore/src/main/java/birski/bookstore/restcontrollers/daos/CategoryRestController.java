@@ -24,7 +24,7 @@ public class CategoryRestController {
         return categoryService.createCategory(category);
     }
 
-    @GetMapping(ID_URL)
+    @GetMapping("/{id}")
     public Category getCategory(@PathVariable long id){
         return categoryService.getCategoryById(id);
     }
@@ -34,12 +34,12 @@ public class CategoryRestController {
         return categoryService.getCategories();
     }
 
-    @PutMapping(ID_URL)
+    @PutMapping("/{id}")
     public Category updateCategory(@PathVariable long id, @RequestBody Category category){
         return categoryService.updateCategory(id, category);
     }
 
-    @DeleteMapping(ID_URL)
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable long id){
         return categoryService.deleteCategory(id);
     }

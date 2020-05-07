@@ -10,7 +10,7 @@
       </div>
         <ul class="navbar-nav">
             <li><a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" routerLink="/welcome" class="nav-link">Home</a></li>
-            <li><a *ngIf="hardcodedAuthenticationService.isUserLoggedIn()" routerLink="/admin" class="nav-link">Admin</a></li>
+            <li><a *ngIf="hardcodedAuthenticationService.isAdmin()" routerLink="/admin" class="nav-link">Admin</a></li>
         </ul>
 
         <ul class="navbar-nav navbar-collapse justify-content-end">
@@ -19,6 +19,3 @@
         </ul>
     </nav>
 </header>
-
-
-<!--routerLink="/welcome/{{category.categoryName}}"-->

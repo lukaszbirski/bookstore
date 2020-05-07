@@ -19,6 +19,7 @@ export class Comment {
 export class ListCommentsComponent implements OnInit {
 
   public comments: Comment[];
+  public deleteError: string;
 
   constructor(
     private commentsService: CommentDataService
@@ -41,6 +42,9 @@ export class ListCommentsComponent implements OnInit {
     console.log(`delete ${bookTitle}, ${author}`);
     this.commentsService.deleteComment(bookTitle, author).subscribe(
       response => {
+        this.refreshComments();
+      }, error => {
+        this.deleteError = error.error.text;
         this.refreshComments();
       }
     );

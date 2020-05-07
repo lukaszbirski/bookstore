@@ -9,7 +9,6 @@ import java.util.List;
 
 import static birski.bookstore.configs.ApiConfig.API_URL;
 import static birski.bookstore.configs.ApiConfig.BOOKS_URL;
-import static birski.bookstore.configs.ApiConfig.ID_URL;
 
 @RestController
 @RequestMapping(API_URL + BOOKS_URL)
@@ -26,7 +25,7 @@ public class BookRestController {
         return bookService.createBook(book);
     }
 
-    @GetMapping(ID_URL)
+    @GetMapping("/{id}")
     public Book getBook(@PathVariable long id){
         return bookService.getBookById(id);
     }
@@ -36,7 +35,7 @@ public class BookRestController {
         return bookService.getBooks();
     }
 
-    @PutMapping(ID_URL)
+    @PutMapping("/{id}")
     public Book updateBook(@PathVariable long id, @RequestBody Book book){
         return bookService.updateBook(id, book);
     }
